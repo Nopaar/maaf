@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Invoice TS SERVICE SOREANG</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    background:#dcdcdc;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.wrapper{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    padding:10px;
+}
+
+.form-panel{
+
+    width:330px;
+    background:#fff;
+
+    padding:20px;
+
+    border-radius:8px;
+
+    box-shadow:0 0 10px rgba(0,0,0,0.08);
+}
+
+.form-panel h2{
+
+    margin-top:0;
+    margin-bottom:20px;
+
+    font-size:24px;
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    font-size:14px;
+    font-weight:bold;
+}
+
+input,
+textarea,
+select{
+
+    width:100%;
+
+    padding:10px;
+
+    margin-bottom:15px;
+
+    border:1px solid #ccc;
+
+    border-radius:4px;
+
+    font-size:14px;
+
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+textarea{
+
+    resize:vertical;
+    min-height:70px;
+}
+
+button{
+
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    background:#0d6efd;
+
+    color:#fff;
+
+    border-radius:5px;
+
+    font-size:16px;
+
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0b5ed7;
+}
+
+.invoice-wrapper{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+.invoice-paper{
+
+    width:794px;
+    height:1123px;
+
+    background:#fff;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+@page{
+    size:A4;
+    margin:0;
+}
+
+.top-left{
+
+    position:absolute;
+
+    top:18px;
+    left:27px;
+
+    font-size:11px;
+}
+
+.top-center{
+
+    position:absolute;
+
+    top:18px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:11px;
+}
+
+.company{
+
+    text-align:center;
+
+    margin-top:72px;
+}
+
+.company h1{
+
+    margin:0;
+
+    font-size:25px;
+
+    font-weight:500;
+
+    letter-spacing:-0.2px;
+}
+
+.address{
+
+    margin-top:11px;
+
+    font-size:11px;
+}
+
+.mobile{
+
+    margin-top:3px;
+
+    font-size:11px;
+
+    font-weight:bold;
+}
+
+.mobile span{
+    font-weight:normal;
+}
+
+.invoice-title{
+
+    text-align:center;
+
+    font-size:18px;
+
+    margin-top:10px;
+}
+
+.info-wrap{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:12px;
+
+    padding-left:30px;
+    padding-right:30px;
+}
+
+.left-info,
+.right-info{
+
+    font-size:11px;
+
+    line-height:16px;
+}
+
+.left-info{
+    width:52%;
+}
+
+.right-info{
+    width:26%;
+}
+
+.row{
+    display:flex;
+}
+
+.label{
+
+    width:67px;
+
+    font-weight:bold;
+}
+
+.separator{
+    width:9px;
+}
+
+.faulty{
+
+    margin-top:26px;
+
+    padding-left:30px;
+
+    font-size:11px;
+
+    line-height:16px;
+}
+
+.faulty .title{
+    font-weight:bold;
+}
+
+.product-table{
+
+    width:calc(100% - 60px);
+
+    margin-left:30px;
+
+    margin-top:18px;
+
+    border-collapse:collapse;
+
+    font-size:11px;
+
+    table-layout:fixed;
+}
+
+.product-table th{
+
+    text-align:left;
+
+    padding-bottom:5px;
+
+    font-weight:bold;
+}
+
+.product-table td{
+
+    padding-top:6px;
+}
+
+.product-table th:nth-child(2),
+.product-table td:nth-child(2){
+
+    text-align:center;
+}
+
+.product-table th:nth-child(3),
+.product-table td:nth-child(3){
+
+    text-align:right;
+    padding-right:28px;
+}
+
+.product-table th:nth-child(4),
+.product-table td:nth-child(4){
+
+    text-align:right;
+    padding-right:0;
+}
+
+.line{
+
+    width:calc(100% - 60px);
+
+    margin-left:30px;
+
+    margin-top:34px;
+
+    border-top:1px solid #444;
+}
+
+.total-table{
+
+    width:calc(100% - 60px);
+
+    margin-left:30px;
+
+    margin-top:15px;
+
+    border-collapse:collapse;
+
+    font-size:11px;
+}
+
+.total-table td{
+
+    padding:1px 0;
+
+    vertical-align:top;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.right{
+    text-align:right;
+}
+
+.terbilang{
+
+    width:calc(100% - 60px);
+
+    margin-left:30px;
+
+    margin-top:0;
+
+    text-align:right;
+
+    font-size:10px;
+
+    line-height:14px;
+}
+
+.footer-left{
+
+    position:absolute;
+
+    left:25px;
+    bottom:16px;
+
+    font-size:9px;
+}
+
+.footer-right{
+
+    position:absolute;
+
+    right:25px;
+    bottom:16px;
+
+    font-size:9px;
+}
+
+@media print{
+
+    html,
+    body{
+
+        width:210mm;
+        height:297mm;
+
+        background:#fff;
+    }
+
+    .form-panel{
+        display:none;
+    }
+
+    .wrapper{
+
+        padding:0;
+        margin:0;
+
+        display:block;
+    }
+
+    .invoice-wrapper{
+
+        display:block;
+    }
+
+    .invoice-paper{
+
+        width:210mm;
+        height:297mm;
+
+        margin:0 auto;
+
+        box-shadow:none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <div class="form-panel">
+
+        <h2>Input Invoice</h2>
+
+        <label>Invoice Number</label>
+        <input type="text" id="invoice_no" value="TSC9690">
+
+        <label>Customer</label>
+        <input type="text" id="customer" value="IBU ESTI">
+
+        <label>Mobile Phone</label>
+        <input type="text" id="mobile" value="-">
+
+        <label>Type</label>
+        <input type="text" id="type" value="Y33S">
+
+        <label>Nama Teknisi</label>
+        <input type="text" id="technician" value="Candra Lesmana">
+
+        <label>Faulty</label>
+        <textarea id="faulty">GANTI BATERAI , GANTI BACKGLASS</textarea>
+
+        <label>Produk / Jasa</label>
+        <input type="text" id="product" value="Y33S - GANTI BATERAI">
+
+        <label>Qty</label>
+        <input type="text" id="qty" value="1 PCS">
+
+        <label>Harga</label>
+        <input type="number" id="price" value="310000">
+
+        <label>Payment Method</label>
+
+        <select id="payment">
+            <option value="Tunai">Tunai</option>
+            <option value="Transfer">Transfer</option>
+        </select>
+
+        <button onclick="printInvoice()">
+            PRINT INVOICE
+        </button>
+
+    </div>
+
+    <div class="invoice-wrapper">
+
+        <div class="invoice-paper">
+
+            <div class="top-left" id="topDate">
+                5/24/26, 12:31 AM
+            </div>
+
+            <div class="top-center" id="topInvoice">
+                TSC9690
+            </div>
+
+            <div class="company">
+
+                <h1>TS SERVICE SOREANG</h1>
+
+                <div class="address">
+                    Jl. Raya Soreang - Banjaran No.436, Kec. Soreang, Kab.Bandung
+                </div>
+
+                <div class="mobile">
+                    Mobile: 081212005800 , <span>https://tolerant-smartphone.com</span>
+                </div>
+
+            </div>
+
+            <div class="invoice-title">
+                Invoice
+            </div>
+
+            <div class="info-wrap">
+
+                <div class="left-info">
+
+                    <div class="row">
+                        <div class="label">Invoice No.</div>
+                        <div class="separator">:</div>
+                        <div id="showInvoiceNo">TSC9690</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label">Customer</div>
+                        <div class="separator">:</div>
+                        <div id="showCustomer">IBU ESTI</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label">Mobile</div>
+                        <div class="separator">:</div>
+                        <div id="showMobile">-</div>
+                    </div>
+
+                </div>
+
+                <div class="right-info">
+
+                    <div class="row">
+                        <div class="label">Date</div>
+                        <div class="separator">:</div>
+                        <div id="showDate">23-05-2026 20:04</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label">Type</div>
+                        <div class="separator">:</div>
+                        <div id="showType">Y33S</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label">Teknisi</div>
+                        <div class="separator">:</div>
+                        <div id="showTechnician">Candra Lesmana</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="faulty">
+
+                <div class="title">
+                    Faulty :
+                </div>
+
+                <div id="showFaulty">
+                    GANTI BATERAI , GANTI BACKGLASS
+                </div>
+
+            </div>
+
+            <table class="product-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th width="58%">
+                            Produk / Jasa
+                        </th>
+
+                        <th width="14%">
+                            Qty
+                        </th>
+
+                        <th width="14%">
+                            Price
+                        </th>
+
+                        <th width="14%">
+                            Subtotal
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td id="showProduct">
+                            Y33S - GANTI BATERAI
+                        </td>
+
+                        <td id="showQty">
+                            1 PCS
+                        </td>
+
+                        <td id="showPrice">
+                            310,000
+                        </td>
+
+                        <td id="showSubtotal">
+                            310,000
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <div class="line"></div>
+
+            <table class="total-table">
+
+                <tr>
+
+                    <td width="22%" id="showPaymentMethod">
+                        Tunai
+                    </td>
+
+                    <td width="18%" id="showPaidLeft">
+                        Rp 310,000
+                    </td>
+
+                    <td width="17%" id="bottomDate">
+                        23-05-2026
+                    </td>
+
+                    <td width="18%" class="bold">
+                        Subtotal:
+                    </td>
+
+                    <td width="25%" class="right" id="showSubtotalBottom">
+                        Rp 310,000
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td class="bold">
+                        Total Paid
+                    </td>
+
+                    <td class="bold" id="showTotalPaid">
+                        Rp 310,000
+                    </td>
+
+                    <td></td>
+
+                    <td class="bold">
+                        Total:
+                    </td>
+
+                    <td class="right bold" id="showTotal">
+                        Rp 310,000
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <!-- TERBILANG AUTO -->
+
+            <div class="terbilang" id="terbilangText">
+                (three hundred ten thousand)
+            </div>
+
+            <div class="footer-left">
+                https://tolerant-smartphone.net/sells
+            </div>
+
+            <div class="footer-right">
+                1/1
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function rupiah(number){
+
+    return Number(number).toLocaleString('en-US');
+
+}
+
+/* TERBILANG OTOMATIS */
+
+function numberToWords(num){
+
+    const ones = [
+        '', 'one', 'two', 'three', 'four',
+        'five', 'six', 'seven', 'eight',
+        'nine', 'ten', 'eleven', 'twelve',
+        'thirteen', 'fourteen', 'fifteen',
+        'sixteen', 'seventeen', 'eighteen',
+        'nineteen'
+    ];
+
+    const tens = [
+        '', '', 'twenty', 'thirty', 'forty',
+        'fifty', 'sixty', 'seventy',
+        'eighty', 'ninety'
+    ];
+
+    function convertHundreds(n){
+
+        let str = '';
+
+        if(n > 99){
+
+            str += ones[Math.floor(n / 100)] + ' hundred ';
+
+            n = n % 100;
+        }
+
+        if(n > 19){
+
+            str += tens[Math.floor(n / 10)] + ' ';
+
+            n = n % 10;
+        }
+
+        if(n > 0){
+
+            str += ones[n] + ' ';
+        }
+
+        return str.trim();
+    }
+
+    if(num === 0){
+        return 'zero';
+    }
+
+    let result = '';
+
+    if(num >= 1000000){
+
+        result += convertHundreds(Math.floor(num / 1000000))
+        + ' million ';
+
+        num = num % 1000000;
+    }
+
+    if(num >= 1000){
+
+        result += convertHundreds(Math.floor(num / 1000))
+        + ' thousand ';
+
+        num = num % 1000;
+    }
+
+    if(num > 0){
+
+        result += convertHundreds(num);
+    }
+
+    return result.trim();
+}
+
+function realtimeClock(){
+
+    let now = new Date();
+
+    let topFormat = now.toLocaleString('en-US',{
+
+        year:'2-digit',
+        month:'numeric',
+        day:'numeric',
+        hour:'numeric',
+        minute:'2-digit'
+
+    });
+
+    document.getElementById('topDate').innerText =
+        topFormat;
+
+    let day = String(now.getDate()).padStart(2,'0');
+    let month = String(now.getMonth()+1).padStart(2,'0');
+    let year = now.getFullYear();
+
+    let hour = String(now.getHours()).padStart(2,'0');
+    let minute = String(now.getMinutes()).padStart(2,'0');
+
+    document.getElementById('showDate').innerText =
+        `${day}-${month}-${year} ${hour}:${minute}`;
+
+    document.getElementById('bottomDate').innerText =
+        `${day}-${month}-${year}`;
+}
+
+setInterval(realtimeClock,1000);
+
+function updateInvoice(){
+
+    let invoice = document.getElementById('invoice_no').value;
+    let customer = document.getElementById('customer').value;
+    let mobile = document.getElementById('mobile').value;
+    let type = document.getElementById('type').value;
+    let technician = document.getElementById('technician').value;
+    let faulty = document.getElementById('faulty').value;
+    let product = document.getElementById('product').value;
+    let qty = document.getElementById('qty').value;
+    let price = document.getElementById('price').value;
+    let payment = document.getElementById('payment').value;
+
+    let subtotal = Number(price);
+
+    document.getElementById('terbilangText').innerHTML =
+        '(' + numberToWords(subtotal) + ')';
+
+    document.getElementById('topInvoice').innerText =
+        invoice;
+
+    document.getElementById('showInvoiceNo').innerText =
+        invoice;
+
+    document.getElementById('showCustomer').innerText =
+        customer;
+
+    document.getElementById('showMobile').innerText =
+        mobile;
+
+    document.getElementById('showType').innerText =
+        type;
+
+    document.getElementById('showTechnician').innerText =
+        technician;
+
+    document.getElementById('showFaulty').innerText =
+        faulty;
+
+    document.getElementById('showProduct').innerText =
+        product;
+
+    document.getElementById('showQty').innerText =
+        qty;
+
+    document.getElementById('showPrice').innerText =
+        rupiah(price);
+
+    document.getElementById('showSubtotal').innerText =
+        rupiah(subtotal);
+
+    document.getElementById('showSubtotalBottom').innerText =
+        'Rp ' + rupiah(subtotal);
+
+    document.getElementById('showTotal').innerText =
+        'Rp ' + rupiah(subtotal);
+
+    document.getElementById('showTotalPaid').innerText =
+        'Rp ' + rupiah(subtotal);
+
+    document.getElementById('showPaidLeft').innerText =
+        'Rp ' + rupiah(subtotal);
+
+    document.getElementById('showPaymentMethod').innerText =
+        payment;
+}
+
+function printInvoice(){
+
+    const originalTitle = document.title;
+
+    document.title = '';
+
+    window.print();
+
+    setTimeout(function(){
+
+        document.title = originalTitle;
+
+    },500);
+}
+
+document.querySelectorAll('input, textarea, select')
+.forEach(el=>{
+
+    el.addEventListener('input', updateInvoice);
+
+});
+
+updateInvoice();
+realtimeClock();
+
+</script>
+
+</body>
+</html>
