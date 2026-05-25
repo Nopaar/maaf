@@ -1,10 +1,10 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>????</title>
+
+<title>Login</title>
 
 <style>
 
@@ -20,84 +20,116 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(90deg,#adadb8,#000000);
+  background:#f5f5f5;
 }
 
 .login-box{
   width:400px;
-  background:#fff;
-  padding:35px;
-  border-radius:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  background:#ffffff;
+  padding:40px;
+  border-radius:24px;
+  box-shadow:
+  0 10px 30px rgba(0,0,0,0.08),
+  0 2px 10px rgba(0,0,0,0.03);
+  border:1px solid #ececec;
 }
 
 .title{
   text-align:center;
-  font-size:32px;
-  font-weight:bold;
-  margin-bottom:30px;
+  font-size:34px;
+  font-weight:700;
+  color:#111;
+  margin-bottom:35px;
+  letter-spacing:1px;
 }
 
 .input-group{
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
 label{
   display:block;
   margin-bottom:8px;
+  color:#333;
+  font-size:14px;
   font-weight:600;
 }
 
 input{
   width:100%;
-  height:50px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  padding:0 15px;
+  height:54px;
+  border:1px solid #dcdcdc;
+  border-radius:14px;
+  padding:0 16px;
   font-size:15px;
+  background:#fafafa;
+  transition:.25s;
 }
 
 input:focus{
   outline:none;
-  border-color:#4f4f53;
+  border-color:#999;
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(0,0,0,0.05);
 }
 
 button{
   width:100%;
-  height:52px;
+  height:54px;
   border:none;
-  border-radius:10px;
-  background:linear-gradient(90deg,#5b5ce9,#4285f4);
+  border-radius:14px;
+  background:#111111;
   color:white;
   font-size:16px;
-  font-weight:bold;
+  font-weight:700;
   cursor:pointer;
+  transition:.25s;
+  margin-top:5px;
 }
 
 button:hover{
-  opacity:.9;
+  background:#222;
+  transform:translateY(-1px);
 }
 
-.error{
-  margin-top:15px;
-  color:red;
+button:active{
+  transform:scale(.99);
+}
+
+#message{
+  margin-top:18px;
   text-align:center;
   font-size:14px;
 }
 
+.success{
+  color:#1a7f37;
+  font-weight:600;
+}
+
+.error{
+  color:#d93025;
+  font-weight:600;
+}
+
+::placeholder{
+  color:#999;
+}
+
 </style>
+
 </head>
 <body>
 
 <div class="login-box">
 
   <div class="title">
-    ?
+    LOGIN
   </div>
 
   <div class="input-group">
-    <label>Username</label>
-    <input type="text" id="userid" placeholder="Masukkan ID">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="Masukkan Email">
   </div>
 
   <div class="input-group">
@@ -109,34 +141,66 @@ button:hover{
     Masuk
   </button>
 
-  <div class="error" id="error"></div>
+  <div id="message"></div>
 
 </div>
 
-<script>
+<script type="module">
 
-// ID & PASSWORD LOGIN
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-const USER_ID = "spakbor";
-const USER_PASSWORD = "kontol";
+import {
+  getAuth,
+  signInWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-function login(){
+const firebaseConfig = {
+  apiKey: "AIzaSyB3mxe87NySKiK3DHy1Xgz9I-pfFmZQNOk",
+  authDomain: "login-d5403.firebaseapp.com",
+  projectId: "login-d5403",
+  storageBucket: "login-d5403.firebasestorage.app",
+  messagingSenderId: "1019154611121",
+  appId: "1:1019154611121:web:4dca630e51d15ebc991b90",
+  measurementId: "G-D9CNBW19L4"
+};
 
-  const userid = document.getElementById("userid").value;
-  const password = document.getElementById("password").value;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-  if(userid === USER_ID && password === USER_PASSWORD){
+window.login = function(){
 
-    // LOGIN BERHASIL
-    window.location.href = "login.html";
+  const email =
+  document.getElementById("email").value;
 
-  }else{
+  const password =
+  document.getElementById("password").value;
 
-    // LOGIN GAGAL
-    document.getElementById("error").innerHTML =
-    "YAHAHAHA GABISA MASUK";
+  const message =
+  document.getElementById("message");
 
-  }
+  signInWithEmailAndPassword(auth, email, password)
+
+  .then((userCredential) => {
+
+    message.innerHTML =
+    "<div class='success'>Login Berhasil</div>";
+
+    setTimeout(()=>{
+
+      window.location.href = "core.html";
+
+    },1000);
+
+  })
+
+  .catch((error) => {
+
+    message.innerHTML =
+    "<div class='error'>Email atau password salah</div>";
+
+  });
 
 }
 
