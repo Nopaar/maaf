@@ -36,6 +36,9 @@ html,body{
     border-radius:8px;
 
     box-shadow:0 0 10px rgba(0,0,0,0.08);
+
+    max-height:95vh;
+    overflow:auto;
 }
 
 .form-panel h2{
@@ -98,6 +101,8 @@ button{
     font-size:16px;
 
     cursor:pointer;
+
+    margin-bottom:10px;
 }
 
 button:hover{
@@ -360,24 +365,38 @@ button:hover{
     line-height:14px;
 }
 
-.footer-left{
+.history-box{
 
-    position:absolute;
+    background:#f5f5f5;
 
-    left:25px;
-    bottom:16px;
+    border:1px solid #ddd;
 
-    font-size:9px;
+    border-radius:5px;
+
+    padding:10px;
+
+    margin-bottom:10px;
 }
 
-.footer-right{
+.history-box button{
 
-    position:absolute;
+    padding:8px;
 
-    right:25px;
-    bottom:16px;
+    font-size:12px;
 
-    font-size:9px;
+    margin-top:5px;
+
+    margin-bottom:0;
+}
+
+.delete-btn{
+
+    background:#dc3545;
+}
+
+.delete-btn:hover{
+
+    background:#bb2d3b;
 }
 
 @media print{
@@ -431,31 +450,31 @@ button:hover{
         <h2>Input Invoice</h2>
 
         <label>Invoice Number</label>
-        <input type="text" id="invoice_no" value="TSC9690">
+        <input type="text" id="invoice_no">
 
         <label>Customer</label>
-        <input type="text" id="customer" value="">
+        <input type="text" id="customer">
 
         <label>Mobile Phone</label>
         <input type="text" id="mobile" value="-">
 
         <label>Type</label>
-        <input type="text" id="type" value="">
+        <input type="text" id="type">
 
         <label>Nama Teknisi</label>
-        <input type="text" id="technician" value="">
+        <input type="text" id="technician">
 
         <label>Faulty</label>
         <textarea id="faulty"></textarea>
 
         <label>Produk / Jasa</label>
-        <input type="text" id="product" value="">
+        <input type="text" id="product">
 
         <label>Qty</label>
         <input type="text" id="qty" value="1 PCS">
 
         <label>Harga</label>
-        <input type="number" id="price" value="">
+        <input type="number" id="price">
 
         <label>Payment Method</label>
 
@@ -464,9 +483,17 @@ button:hover{
             <option value="Transfer">Transfer</option>
         </select>
 
+        <button onclick="saveInvoice()">
+            SIMPAN INVOICE
+        </button>
+
         <button onclick="printInvoice()">
             PRINT INVOICE
         </button>
+
+        <h3>Riwayat Invoice</h3>
+
+        <div id="history"></div>
 
     </div>
 
@@ -474,13 +501,9 @@ button:hover{
 
         <div class="invoice-paper">
 
-            <div class="top-left" id="topDate">
-                5/24/26, 12:31 AM
-            </div>
+            <div class="top-left" id="topDate"></div>
 
-            <div class="top-center" id="topInvoice">
-                TSC9690
-            </div>
+            <div class="top-center" id="topInvoice"></div>
 
             <div class="company">
 
@@ -491,7 +514,8 @@ button:hover{
                 </div>
 
                 <div class="mobile">
-                    Mobile: 081212005800 , <span>https://tolerant-smartphone.com</span>
+                    Mobile: 081212005800 , 
+                    <span>https://tolerant-smartphone.com</span>
                 </div>
 
             </div>
@@ -507,19 +531,19 @@ button:hover{
                     <div class="row">
                         <div class="label">Invoice No.</div>
                         <div class="separator">:</div>
-                        <div id="showInvoiceNo">TSC9690</div>
+                        <div id="showInvoiceNo"></div>
                     </div>
 
                     <div class="row">
                         <div class="label">Customer</div>
                         <div class="separator">:</div>
-                        <div id="showCustomer">IBU ESTI</div>
+                        <div id="showCustomer"></div>
                     </div>
 
                     <div class="row">
                         <div class="label">Mobile</div>
                         <div class="separator">:</div>
-                        <div id="showMobile">-</div>
+                        <div id="showMobile"></div>
                     </div>
 
                 </div>
@@ -529,19 +553,19 @@ button:hover{
                     <div class="row">
                         <div class="label">Date</div>
                         <div class="separator">:</div>
-                        <div id="showDate">23-05-2026 20:04</div>
+                        <div id="showDate"></div>
                     </div>
 
                     <div class="row">
                         <div class="label">Type</div>
                         <div class="separator">:</div>
-                        <div id="showType">Y33S</div>
+                        <div id="showType"></div>
                     </div>
 
                     <div class="row">
                         <div class="label">Teknisi</div>
                         <div class="separator">:</div>
-                        <div id="showTechnician">Candra Lesmana</div>
+                        <div id="showTechnician"></div>
                     </div>
 
                 </div>
@@ -554,9 +578,7 @@ button:hover{
                     Faulty :
                 </div>
 
-                <div id="showFaulty">
-                    GANTI BATERAI , GANTI BACKGLASS
-                </div>
+                <div id="showFaulty"></div>
 
             </div>
 
@@ -590,21 +612,13 @@ button:hover{
 
                     <tr>
 
-                        <td id="showProduct">
-                            Y33S - GANTI BATERAI
-                        </td>
+                        <td id="showProduct"></td>
 
-                        <td id="showQty">
-                            1 PCS
-                        </td>
+                        <td id="showQty"></td>
 
-                        <td id="showPrice">
-                            310,000
-                        </td>
+                        <td id="showPrice"></td>
 
-                        <td id="showSubtotal">
-                            310,000
-                        </td>
+                        <td id="showSubtotal"></td>
 
                     </tr>
 
@@ -618,25 +632,17 @@ button:hover{
 
                 <tr>
 
-                    <td width="22%" id="showPaymentMethod">
-                        Tunai
-                    </td>
+                    <td width="22%" id="showPaymentMethod"></td>
 
-                    <td width="18%" id="showPaidLeft">
-                        Rp 310,000
-                    </td>
+                    <td width="18%" id="showPaidLeft"></td>
 
-                    <td width="17%" id="bottomDate">
-                        23-05-2026
-                    </td>
+                    <td width="17%" id="bottomDate"></td>
 
                     <td width="18%" class="bold">
                         Subtotal:
                     </td>
 
-                    <td width="25%" class="right" id="showSubtotalBottom">
-                        Rp 310,000
-                    </td>
+                    <td width="25%" class="right" id="showSubtotalBottom"></td>
 
                 </tr>
 
@@ -646,9 +652,7 @@ button:hover{
                         Total Paid
                     </td>
 
-                    <td class="bold" id="showTotalPaid">
-                        Rp 310,000
-                    </td>
+                    <td class="bold" id="showTotalPaid"></td>
 
                     <td></td>
 
@@ -656,235 +660,395 @@ button:hover{
                         Total:
                     </td>
 
-                    <td class="right bold" id="showTotal">
-                        Rp 310,000
-                    </td>
+                    <td class="right bold" id="showTotal"></td>
 
                 </tr>
 
             </table>
 
-            
-            <!-- TERBILANG AUTO -->
+            <div class="terbilang" id="terbilangText"></div>
 
-            <div class="terbilang" id="terbilangText">
-                (three hundred ten thousand)
-            </div>
         </div>
 
     </div>
 
 </div>
 
-<script>
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    deleteDoc,
+    doc,
+    updateDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyBeqqawnJUS3p8x0EIrtXoJeiCSwgtMzCg",
+  authDomain: "ts-service-soreang.firebaseapp.com",
+  projectId: "ts-service-soreang",
+  storageBucket: "ts-service-soreang.firebasestorage.app",
+  messagingSenderId: "220923770477",
+  appId: "1:220923770477:web:94489b72c22f5ec28d3164",
+  measurementId: "G-9P4FBQ3N90"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+window.editId = null;
+
+function el(id){
+
+    return document.getElementById(id);
+}
+
+window.el = el;
 
 function rupiah(number){
 
-    return Number(number).toLocaleString('en-US');
-
+    return Number(number || 0)
+    .toLocaleString('id-ID');
 }
 
-/* TERBILANG OTOMATIS */
+function numberToWords(n){
 
-function numberToWords(num){
+    n = parseInt(n);
 
-    const ones = [
-        '', 'one', 'two', 'three', 'four',
-        'five', 'six', 'seven', 'eight',
-        'nine', 'ten', 'eleven', 'twelve',
-        'thirteen', 'fourteen', 'fifteen',
-        'sixteen', 'seventeen', 'eighteen',
-        'nineteen'
+    const angka = [
+        "", "Satu", "Dua", "Tiga", "Empat",
+        "Lima", "Enam", "Tujuh", "Delapan",
+        "Sembilan", "Sepuluh", "Sebelas"
     ];
 
-    const tens = [
-        '', '', 'twenty', 'thirty', 'forty',
-        'fifty', 'sixty', 'seventy',
-        'eighty', 'ninety'
-    ];
+    function terbilang(x){
 
-    function convertHundreds(n){
+        x = Math.floor(x);
 
-        let str = '';
+        if(x < 12)
+            return angka[x];
 
-        if(n > 99){
+        if(x < 20)
+            return terbilang(x - 10) + " Belas";
 
-            str += ones[Math.floor(n / 100)] + ' hundred ';
+        if(x < 100)
+            return terbilang(x / 10) + " Puluh " + terbilang(x % 10);
 
-            n = n % 100;
-        }
+        if(x < 200)
+            return "Seratus " + terbilang(x - 100);
 
-        if(n > 19){
+        if(x < 1000)
+            return terbilang(x / 100) + " Ratus " + terbilang(x % 100);
 
-            str += tens[Math.floor(n / 10)] + ' ';
+        if(x < 2000)
+            return "Seribu " + terbilang(x - 1000);
 
-            n = n % 10;
-        }
+        if(x < 1000000)
+            return terbilang(x / 1000) + " Ribu " + terbilang(x % 1000);
 
-        if(n > 0){
+        if(x < 1000000000)
+            return terbilang(x / 1000000) + " Juta " + terbilang(x % 1000000);
 
-            str += ones[n] + ' ';
-        }
-
-        return str.trim();
+        return "";
     }
 
-    if(num === 0){
-        return 'zero';
-    }
-
-    let result = '';
-
-    if(num >= 1000000){
-
-        result += convertHundreds(Math.floor(num / 1000000))
-        + ' million ';
-
-        num = num % 1000000;
-    }
-
-    if(num >= 1000){
-
-        result += convertHundreds(Math.floor(num / 1000))
-        + ' thousand ';
-
-        num = num % 1000;
-    }
-
-    if(num > 0){
-
-        result += convertHundreds(num);
-    }
-
-    return result.trim();
+    return terbilang(n) + " Rupiah";
 }
 
 function realtimeClock(){
 
-    let now = new Date();
+    const now = new Date();
 
-    let topFormat = now.toLocaleString('en-US',{
+    el('topDate').innerText =
+        now.toLocaleString('id-ID');
 
-        year:'2-digit',
-        month:'numeric',
-        day:'numeric',
-        hour:'numeric',
-        minute:'2-digit'
+    const day =
+        String(now.getDate()).padStart(2,'0');
 
-    });
+    const month =
+        String(now.getMonth()+1).padStart(2,'0');
 
-    document.getElementById('topDate').innerText =
-        topFormat;
+    const year = now.getFullYear();
 
-    let day = String(now.getDate()).padStart(2,'0');
-    let month = String(now.getMonth()+1).padStart(2,'0');
-    let year = now.getFullYear();
+    const hour =
+        String(now.getHours()).padStart(2,'0');
 
-    let hour = String(now.getHours()).padStart(2,'0');
-    let minute = String(now.getMinutes()).padStart(2,'0');
+    const minute =
+        String(now.getMinutes()).padStart(2,'0');
 
-    document.getElementById('showDate').innerText =
+    el('showDate').innerText =
         `${day}-${month}-${year} ${hour}:${minute}`;
 
-    document.getElementById('bottomDate').innerText =
+    el('bottomDate').innerText =
         `${day}-${month}-${year}`;
 }
 
-setInterval(realtimeClock,1000);
+function generateInvoice(){
+
+    const now = new Date();
+
+    const code =
+        'TSC' +
+        now.getFullYear().toString().slice(2) +
+        String(now.getMonth()+1).padStart(2,'0') +
+        String(now.getDate()).padStart(2,'0') +
+        String(now.getHours()).padStart(2,'0') +
+        String(now.getMinutes()).padStart(2,'0') +
+        String(now.getSeconds()).padStart(2,'0');
+
+    el('invoice_no').value = code;
+}
 
 function updateInvoice(){
 
-    let invoice = document.getElementById('invoice_no').value;
-    let customer = document.getElementById('customer').value;
-    let mobile = document.getElementById('mobile').value;
-    let type = document.getElementById('type').value;
-    let technician = document.getElementById('technician').value;
-    let faulty = document.getElementById('faulty').value;
-    let product = document.getElementById('product').value;
-    let qty = document.getElementById('qty').value;
-    let price = document.getElementById('price').value;
-    let payment = document.getElementById('payment').value;
+    const invoice = el('invoice_no').value;
+    const customer = el('customer').value;
+    const mobile = el('mobile').value;
+    const type = el('type').value;
+    const technician = el('technician').value;
+    const faulty = el('faulty').value;
+    const product = el('product').value;
+    const qty = el('qty').value;
 
-    let subtotal = Number(price);
+    const qtyNum =
+        parseInt(qty) || 1;
 
-    document.getElementById('terbilangText').innerHTML =
-        '(' + numberToWords(subtotal) + ')';
+    const price =
+        Number(el('price').value || 0);
 
-    document.getElementById('topInvoice').innerText =
-        invoice;
+    const subtotal =
+        qtyNum * price;
 
-    document.getElementById('showInvoiceNo').innerText =
-        invoice;
+    const payment = el('payment').value;
 
-    document.getElementById('showCustomer').innerText =
-        customer;
+    el('topInvoice').innerText = invoice;
 
-    document.getElementById('showMobile').innerText =
-        mobile;
+    el('showInvoiceNo').innerText = invoice;
+    el('showCustomer').innerText = customer;
+    el('showMobile').innerText = mobile;
 
-    document.getElementById('showType').innerText =
-        type;
+    el('showType').innerText = type;
+    el('showTechnician').innerText = technician;
 
-    document.getElementById('showTechnician').innerText =
-        technician;
+    el('showFaulty').innerText = faulty;
 
-    document.getElementById('showFaulty').innerText =
-        faulty;
+    el('showProduct').innerText = product;
+    el('showQty').innerText = qty;
 
-    document.getElementById('showProduct').innerText =
-        product;
-
-    document.getElementById('showQty').innerText =
-        qty;
-
-    document.getElementById('showPrice').innerText =
+    el('showPrice').innerText =
         rupiah(price);
 
-    document.getElementById('showSubtotal').innerText =
+    el('showSubtotal').innerText =
         rupiah(subtotal);
 
-    document.getElementById('showSubtotalBottom').innerText =
+    el('showSubtotalBottom').innerText =
         'Rp ' + rupiah(subtotal);
 
-    document.getElementById('showTotal').innerText =
+    el('showTotal').innerText =
         'Rp ' + rupiah(subtotal);
 
-    document.getElementById('showTotalPaid').innerText =
+    el('showTotalPaid').innerText =
         'Rp ' + rupiah(subtotal);
 
-    document.getElementById('showPaidLeft').innerText =
+    el('showPaidLeft').innerText =
         'Rp ' + rupiah(subtotal);
 
-    document.getElementById('showPaymentMethod').innerText =
+    el('showPaymentMethod').innerText =
         payment;
+
+    el('terbilangText').innerText =
+        '(' + numberToWords(subtotal) + ')';
 }
 
-function printInvoice(){
+window.updateInvoice = updateInvoice;
 
-    const originalTitle = document.title;
+async function saveInvoice(){
 
-    document.title = '';
+    const customer =
+        el('customer').value.trim();
+
+    if(customer === ''){
+
+        alert('Customer wajib diisi');
+        return;
+    }
+
+    const data = {
+
+        invoice: el('invoice_no').value,
+        customer: el('customer').value,
+        mobile: el('mobile').value,
+        type: el('type').value,
+        technician: el('technician').value,
+        faulty: el('faulty').value,
+        product: el('product').value,
+        qty: el('qty').value,
+        price: Number(el('price').value || 0),
+        payment: el('payment').value,
+        createdAt: new Date()
+
+    };
+
+    try{
+
+        if(window.editId){
+
+            await updateDoc(
+                doc(db,"invoices",window.editId),
+                data
+            );
+
+            alert("Invoice berhasil diupdate");
+
+            window.editId = null;
+
+        }else{
+
+            await addDoc(
+                collection(db,"invoices"),
+                data
+            );
+
+            alert("Invoice berhasil disimpan");
+        }
+
+        generateInvoice();
+
+    }catch(err){
+
+        console.error(err);
+
+        alert("Gagal menyimpan invoice");
+    }
+}
+
+window.saveInvoice = saveInvoice;
+
+function renderHistory(){
+
+    onSnapshot(
+        collection(db,"invoices"),
+        (snapshot)=>{
+
+            let html = '';
+
+            snapshot.forEach((docSnap)=>{
+
+                const item = docSnap.data();
+
+                html += `
+
+                <div class="history-box">
+
+                    <b>${item.invoice}</b><br>
+
+                    ${item.customer}<br>
+
+                    Rp ${rupiah(item.price)}
+
+                    <button onclick="editInvoice('${docSnap.id}')">
+                        Edit
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteInvoice('${docSnap.id}')">
+
+                        Hapus
+
+                    </button>
+
+                </div>
+
+                `;
+            });
+
+            el('history').innerHTML = html;
+        }
+    );
+}
+
+window.editInvoice = async function(id){
+
+    onSnapshot(
+        doc(db,"invoices",id),
+        (docSnap)=>{
+
+            if(!docSnap.exists())
+                return;
+
+            const data = docSnap.data();
+
+            window.editId = id;
+
+            el('invoice_no').value = data.invoice;
+            el('customer').value = data.customer;
+            el('mobile').value = data.mobile;
+            el('type').value = data.type;
+            el('technician').value = data.technician;
+            el('faulty').value = data.faulty;
+            el('product').value = data.product;
+            el('qty').value = data.qty;
+            el('price').value = data.price;
+            el('payment').value = data.payment;
+
+            updateInvoice();
+
+            window.scrollTo({
+                top:0,
+                behavior:'smooth'
+            });
+
+        }
+    );
+};
+
+window.deleteInvoice = async function(id){
+
+    if(!confirm('Hapus invoice ini?'))
+        return;
+
+    await deleteDoc(
+        doc(db,"invoices",id)
+    );
+};
+
+window.printInvoice = function(){
 
     window.print();
+};
 
-    setTimeout(function(){
+document
+.querySelectorAll('input, textarea, select')
+.forEach(item=>{
 
-        document.title = originalTitle;
-
-    },500);
-}
-
-document.querySelectorAll('input, textarea, select')
-.forEach(el=>{
-
-    el.addEventListener('input', updateInvoice);
+    item.addEventListener(
+        'input',
+        updateInvoice
+    );
 
 });
 
+generateInvoice();
+
 updateInvoice();
+
+renderHistory();
+
 realtimeClock();
 
-</script>
+setInterval(realtimeClock,1000);
 
+</script>
 </body>
 </html>
