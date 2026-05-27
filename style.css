@@ -607,3 +607,47 @@ button:hover{
         box-shadow:none;
     }
 }
+
+@media print {
+
+    @page{
+        margin:0;
+    }
+
+    body{
+        margin:0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* HILANGKAN HEADER & FOOTER BROWSER */
+    body::before,
+    body::after{
+        display:none !important;
+    }
+
+    .form-panel,
+    #toggleInvoiceBtn,
+    #toggleHistoryBtn,
+    #historyContainer{
+        display:none !important;
+    }
+
+    .invoice-wrapper{
+        width:100%;
+        display:flex !important;
+        justify-content:center;
+        align-items:flex-start;
+        margin:0;
+        padding:0;
+    }
+
+    .invoice-paper{
+        width:210mm;
+        min-height:auto;
+        margin:0;
+        box-shadow:none;
+        page-break-after:avoid;
+    }
+
+}
