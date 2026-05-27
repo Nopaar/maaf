@@ -5,440 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Invoice TS SERVICE SOREANG</title>
+<link rel="stylesheet" href="style.css">
 
-<style>
-
-*{
-    box-sizing:border-box;
-}
-
-html,body{
-    margin:0;
-    padding:0;
-    background:#dcdcdc;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-.wrapper{
-    display:flex;
-    gap:20px;
-    align-items:flex-start;
-    padding:10px;
-}
-
-.form-panel{
-
-    width:330px;
-    background:#fff;
-
-    padding:20px;
-
-    border-radius:8px;
-
-    box-shadow:0 0 10px rgba(0,0,0,0.08);
-
-    max-height:95vh;
-    overflow:auto;
-}
-
-.form-panel h2{
-
-    margin-top:0;
-    margin-bottom:20px;
-
-    font-size:24px;
-}
-
-label{
-
-    display:block;
-
-    margin-bottom:5px;
-
-    font-size:14px;
-    font-weight:bold;
-}
-
-input,
-textarea,
-select{
-
-    width:100%;
-
-    padding:10px;
-
-    margin-bottom:15px;
-
-    border:1px solid #ccc;
-
-    border-radius:4px;
-
-    font-size:14px;
-
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-textarea{
-
-    resize:vertical;
-    min-height:70px;
-}
-
-button{
-
-    width:100%;
-
-    padding:12px;
-
-    border:none;
-
-    background:#0d6efd;
-
-    color:#fff;
-
-    border-radius:5px;
-
-    font-size:16px;
-
-    cursor:pointer;
-
-    margin-bottom:10px;
-}
-
-button:hover{
-    background:#0b5ed7;
-}
-
-.invoice-wrapper{
-
-    flex:1;
-
-    display:flex;
-
-    justify-content:center;
-}
-
-.invoice-paper{
-
-    width:794px;
-    height:1123px;
-
-    background:#fff;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-@page{
-    size:A4;
-    margin:0;
-}
-
-.top-left{
-
-    position:absolute;
-
-    top:18px;
-    left:27px;
-
-    font-size:11px;
-}
-
-.top-center{
-
-    position:absolute;
-
-    top:18px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    font-size:11px;
-}
-
-.company{
-
-    text-align:center;
-
-    margin-top:72px;
-}
-
-.company h1{
-
-    margin:0;
-
-    font-size:25px;
-
-    font-weight:500;
-
-    letter-spacing:-0.2px;
-}
-
-.address{
-
-    margin-top:11px;
-
-    font-size:11px;
-}
-
-.mobile{
-
-    margin-top:3px;
-
-    font-size:11px;
-
-    font-weight:bold;
-}
-
-.mobile span{
-    font-weight:normal;
-}
-
-.invoice-title{
-
-    text-align:center;
-
-    font-size:18px;
-
-    margin-top:10px;
-}
-
-.info-wrap{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:12px;
-
-    padding-left:30px;
-    padding-right:30px;
-}
-
-.left-info,
-.right-info{
-
-    font-size:11px;
-
-    line-height:16px;
-}
-
-.left-info{
-    width:52%;
-}
-
-.right-info{
-    width:26%;
-}
-
-.row{
-    display:flex;
-}
-
-.label{
-
-    width:67px;
-
-    font-weight:bold;
-}
-
-.separator{
-    width:9px;
-}
-
-.faulty{
-
-    margin-top:26px;
-
-    padding-left:30px;
-
-    font-size:11px;
-
-    line-height:16px;
-}
-
-.faulty .title{
-    font-weight:bold;
-}
-
-.product-table{
-
-    width:calc(100% - 60px);
-
-    margin-left:30px;
-
-    margin-top:18px;
-
-    border-collapse:collapse;
-
-    font-size:11px;
-
-    table-layout:fixed;
-}
-
-.product-table th{
-
-    text-align:left;
-
-    padding-bottom:5px;
-
-    font-weight:bold;
-}
-
-.product-table td{
-
-    padding-top:6px;
-}
-
-.product-table th:nth-child(2),
-.product-table td:nth-child(2){
-
-    text-align:center;
-}
-
-.product-table th:nth-child(3),
-.product-table td:nth-child(3){
-
-    text-align:right;
-    padding-right:28px;
-}
-
-.product-table th:nth-child(4),
-.product-table td:nth-child(4){
-
-    text-align:right;
-    padding-right:0;
-}
-
-.line{
-
-    width:calc(100% - 60px);
-
-    margin-left:30px;
-
-    margin-top:34px;
-
-    border-top:1px solid #444;
-}
-
-.total-table{
-
-    width:calc(100% - 60px);
-
-    margin-left:30px;
-
-    margin-top:15px;
-
-    border-collapse:collapse;
-
-    font-size:11px;
-}
-
-.total-table td{
-
-    padding:1px 0;
-
-    vertical-align:top;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.right{
-    text-align:right;
-}
-
-.terbilang{
-
-    width:calc(100% - 60px);
-
-    margin-left:30px;
-
-    margin-top:0;
-
-    text-align:right;
-
-    font-size:10px;
-
-    line-height:14px;
-}
-
-.history-box{
-
-    background:#f5f5f5;
-
-    border:1px solid #ddd;
-
-    border-radius:5px;
-
-    padding:10px;
-
-    margin-bottom:10px;
-}
-
-.history-box button{
-
-    padding:8px;
-
-    font-size:12px;
-
-    margin-top:5px;
-
-    margin-bottom:0;
-}
-
-.delete-btn{
-
-    background:#dc3545;
-}
-
-.delete-btn:hover{
-
-    background:#bb2d3b;
-}
-
-@media print{
-
-    html,
-    body{
-
-        width:210mm;
-        height:297mm;
-
-        background:#fff;
-    }
-
-    .form-panel{
-        display:none;
-    }
-
-    .wrapper{
-
-        padding:0;
-        margin:0;
-
-        display:block;
-    }
-
-    .invoice-wrapper{
-
-        display:block;
-    }
-
-    .invoice-paper{
-
-        width:210mm;
-        height:297mm;
-
-        margin:0 auto;
-
-        box-shadow:none;
-    }
-}
-
-</style>
 </head>
 
 <body>
@@ -476,6 +44,9 @@ button:hover{
         <label>Harga</label>
         <input type="number" id="price">
 
+        <label>Diskon (%)</label>
+        <input type="number" id="discount" placeholder="Contoh: 10">
+
         <label>Payment Method</label>
 
         <select id="payment">
@@ -491,13 +62,30 @@ button:hover{
             PRINT INVOICE
         </button>
 
-        <h3>Riwayat Invoice</h3>
+        <!-- TOGGLE BUTTON -->
+        <button type="button" id="toggleInvoiceBtn">
+            Sembunyikan Invoice
+        </button>
 
-        <div id="history"></div>
+        <button type="button" id="toggleHistoryBtn">
+            Lihat Riwayat Invoice
+        </button>
+
+        <!-- HISTORY -->
+        <div id="historyContainer" style="display:none; margin-top:15px;">
+
+            <h3 class="history-title">
+                Riwayat Invoice
+            </h3>
+
+            <div id="history"></div>
+
+        </div>
 
     </div>
 
-    <div class="invoice-wrapper">
+    <!-- INVOICE -->
+    <div class="invoice-wrapper" id="invoiceWrapper">
 
         <div class="invoice-paper">
 
@@ -514,7 +102,7 @@ button:hover{
                 </div>
 
                 <div class="mobile">
-                    Mobile: 081212005800 , 
+                    Mobile: 081212005800 ,
                     <span>https://tolerant-smartphone.com</span>
                 </div>
 
@@ -565,7 +153,7 @@ button:hover{
                     <div class="row">
                         <div class="label">Teknisi</div>
                         <div class="separator">:</div>
-                        <div id="showTechnician"></div>
+                        <div class="value" id="showTechnician"></div>
                     </div>
 
                 </div>
@@ -646,7 +234,7 @@ button:hover{
 
                 </tr>
 
-                <tr>
+                <tr id="discountRow">
 
                     <td class="bold">
                         Total Paid
@@ -654,6 +242,20 @@ button:hover{
 
                     <td class="bold" id="showTotalPaid"></td>
 
+                    <td></td>
+
+                    <td class="bold">
+                        Discount:
+                    </td>
+
+                    <td class="right" id="showDiscount"></td>
+
+                </tr>
+
+                <tr>
+
+                    <td></td>
+                    <td></td>
                     <td></td>
 
                     <td class="bold">
@@ -692,13 +294,12 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyBeqqawnJUS3p8x0EIrtXoJeiCSwgtMzCg",
-  authDomain: "ts-service-soreang.firebaseapp.com",
-  projectId: "ts-service-soreang",
-  storageBucket: "ts-service-soreang.firebasestorage.app",
-  messagingSenderId: "220923770477",
-  appId: "1:220923770477:web:94489b72c22f5ec28d3164",
-  measurementId: "G-9P4FBQ3N90"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_BUCKET",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 
 };
 
@@ -709,11 +310,8 @@ const db = getFirestore(app);
 window.editId = null;
 
 function el(id){
-
     return document.getElementById(id);
 }
-
-window.el = el;
 
 function rupiah(number){
 
@@ -725,44 +323,7 @@ function numberToWords(n){
 
     n = parseInt(n);
 
-    const angka = [
-        "", "Satu", "Dua", "Tiga", "Empat",
-        "Lima", "Enam", "Tujuh", "Delapan",
-        "Sembilan", "Sepuluh", "Sebelas"
-    ];
-
-    function terbilang(x){
-
-        x = Math.floor(x);
-
-        if(x < 12)
-            return angka[x];
-
-        if(x < 20)
-            return terbilang(x - 10) + " Belas";
-
-        if(x < 100)
-            return terbilang(x / 10) + " Puluh " + terbilang(x % 10);
-
-        if(x < 200)
-            return "Seratus " + terbilang(x - 100);
-
-        if(x < 1000)
-            return terbilang(x / 100) + " Ratus " + terbilang(x % 100);
-
-        if(x < 2000)
-            return "Seribu " + terbilang(x - 1000);
-
-        if(x < 1000000)
-            return terbilang(x / 1000) + " Ribu " + terbilang(x % 1000);
-
-        if(x < 1000000000)
-            return terbilang(x / 1000000) + " Juta " + terbilang(x % 1000000);
-
-        return "";
-    }
-
-    return terbilang(n) + " Rupiah";
+    return n.toLocaleString('id-ID') + ' Rupiah';
 }
 
 function realtimeClock(){
@@ -820,14 +381,19 @@ function updateInvoice(){
     const product = el('product').value;
     const qty = el('qty').value;
 
-    const qtyNum =
-        parseInt(qty) || 1;
+    const qtyNum = parseInt(qty) || 1;
 
-    const price =
-        Number(el('price').value || 0);
+    const price = Number(el('price').value || 0);
 
-    const subtotal =
-        qtyNum * price;
+    const subtotal = qtyNum * price;
+
+    const discountPercent =
+        Number(el('discount').value || 0);
+
+    const discountAmount =
+        subtotal * discountPercent / 100;
+
+    const total = subtotal - discountAmount;
 
     const payment = el('payment').value;
 
@@ -845,37 +411,45 @@ function updateInvoice(){
     el('showProduct').innerText = product;
     el('showQty').innerText = qty;
 
-    el('showPrice').innerText =
-        rupiah(price);
+    el('showPrice').innerText = rupiah(price);
 
-    el('showSubtotal').innerText =
-        rupiah(subtotal);
+    el('showSubtotal').innerText = rupiah(subtotal);
 
     el('showSubtotalBottom').innerText =
         'Rp ' + rupiah(subtotal);
 
     el('showTotal').innerText =
-        'Rp ' + rupiah(subtotal);
+        'Rp ' + rupiah(total);
 
     el('showTotalPaid').innerText =
-        'Rp ' + rupiah(subtotal);
+        'Rp ' + rupiah(total);
 
     el('showPaidLeft').innerText =
-        'Rp ' + rupiah(subtotal);
+        'Rp ' + rupiah(total);
 
-    el('showPaymentMethod').innerText =
-        payment;
+    el('showPaymentMethod').innerText = payment;
+
+    if(discountPercent > 0){
+
+        el('discountRow').style.display = '';
+
+        el('showDiscount').innerText =
+            `(-) Rp ${rupiah(discountAmount)} (${discountPercent}%)`;
+
+    }else{
+
+        el('discountRow').style.display = 'none';
+    }
 
     el('terbilangText').innerText =
-        '(' + numberToWords(subtotal) + ')';
+        '(' + numberToWords(total) + ')';
 }
 
 window.updateInvoice = updateInvoice;
 
 async function saveInvoice(){
 
-    const customer =
-        el('customer').value.trim();
+    const customer = el('customer').value.trim();
 
     if(customer === ''){
 
@@ -894,6 +468,7 @@ async function saveInvoice(){
         product: el('product').value,
         qty: el('qty').value,
         price: Number(el('price').value || 0),
+        discount: Number(el('discount').value || 0),
         payment: el('payment').value,
         createdAt: new Date()
 
@@ -950,23 +525,37 @@ function renderHistory(){
 
                 <div class="history-box">
 
-                    <b>${item.invoice}</b><br>
+                    <div class="history-top">
+                        <div>
+                            <div class="history-invoice">
+                                ${item.invoice}
+                            </div>
 
-                    ${item.customer}<br>
+                            <div class="history-name">
+                                ${item.customer}
+                            </div>
+                        </div>
 
-                    Rp ${rupiah(item.price)}
+                        <div class="history-price">
+                            Rp ${rupiah(item.price)}
+                        </div>
+                    </div>
 
-                    <button onclick="editInvoice('${docSnap.id}')">
-                        Edit
-                    </button>
+                    <div class="history-actions">
 
-                    <button
-                        class="delete-btn"
-                        onclick="deleteInvoice('${docSnap.id}')">
+                        <button onclick="editInvoice('${docSnap.id}')">
+                            Edit
+                        </button>
 
-                        Hapus
+                        <button
+                            class="delete-btn"
+                            onclick="deleteInvoice('${docSnap.id}')">
 
-                    </button>
+                            Hapus
+
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -1000,6 +589,7 @@ window.editInvoice = async function(id){
             el('product').value = data.product;
             el('qty').value = data.qty;
             el('price').value = data.price;
+            el('discount').value = data.discount || 0;
             el('payment').value = data.payment;
 
             updateInvoice();
@@ -1027,6 +617,54 @@ window.printInvoice = function(){
 
     window.print();
 };
+
+/* TOGGLE INVOICE */
+
+const invoiceWrapper = el('invoiceWrapper');
+const toggleInvoiceBtn = el('toggleInvoiceBtn');
+
+toggleInvoiceBtn.addEventListener('click',()=>{
+
+    if(invoiceWrapper.style.display === 'none'){
+
+        invoiceWrapper.style.display = 'flex';
+
+        toggleInvoiceBtn.innerText =
+            'Sembunyikan Invoice';
+
+    }else{
+
+        invoiceWrapper.style.display = 'none';
+
+        toggleInvoiceBtn.innerText =
+            'Tampilkan Invoice';
+    }
+
+});
+
+/* TOGGLE HISTORY */
+
+const historyContainer = el('historyContainer');
+const toggleHistoryBtn = el('toggleHistoryBtn');
+
+toggleHistoryBtn.addEventListener('click',()=>{
+
+    if(historyContainer.style.display === 'none'){
+
+        historyContainer.style.display = 'block';
+
+        toggleHistoryBtn.innerText =
+            'Sembunyikan Riwayat Invoice';
+
+    }else{
+
+        historyContainer.style.display = 'none';
+
+        toggleHistoryBtn.innerText =
+            'Lihat Riwayat Invoice';
+    }
+
+});
 
 document
 .querySelectorAll('input, textarea, select')
