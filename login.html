@@ -380,7 +380,8 @@ function updateInvoice(){
     const product = el('product').value;
     const qty = el('qty').value;
 
-    const qtyNum = parseInt(qty) || 1;
+    const qtyNum =
+    parseInt(qty.replace(/\D/g,'')) || 1;
 
     const price = Number(el('price').value || 0);
 
@@ -676,11 +677,43 @@ document
 
 });
 
-generateInvoice();
+if(!el('invoice_no').value){
+    generateInvoice();
+}
 
 updateInvoice();
 
 renderHistory();
+
+/* AUTO LOAD LAST INVOICE */
+
+onSnapshot(
+    collection(db,"invoices"),
+    (snapshot)=>{
+
+        if(snapshot.empty) return;
+
+        const docs = snapshot.docs;
+
+        const last = docs[docs.length - 1];
+
+        const data = last.data();
+
+        el('invoice_no').value = data.invoice;
+        el('customer').value = data.customer;
+        el('mobile').value = data.mobile;
+        el('type').value = data.type;
+        el('technician').value = data.technician;
+        el('faulty').value = data.faulty;
+        el('product').value = data.product;
+        el('qty').value = data.qty;
+        el('price').value = data.price;
+        el('discount').value = data.discount || 0;
+        el('payment').value = data.payment;
+
+        updateInvoice();
+    }
+);
 
 realtimeClock();
 
