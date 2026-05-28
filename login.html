@@ -4,15 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Invoice TS SERVICE SOREANG</title>
-<link rel="stylesheet" href="style.css">
+<title>POS - Tolerant Smartphone</title>
 
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
 <div class="wrapper">
+
+    <!-- =========================
+         FORM PANEL
+    ========================== -->
 
     <div class="form-panel">
 
@@ -63,7 +67,6 @@
             PRINT INVOICE
         </button>
 
-        <!-- TOGGLE BUTTON -->
         <button type="button" id="toggleInvoiceBtn">
             Sembunyikan Invoice
         </button>
@@ -73,7 +76,9 @@
         </button>
 
         <!-- HISTORY -->
-        <div id="historyContainer" style="display:none; margin-top:15px;">
+
+        <div id="historyContainer"
+             style="display:none; margin-top:15px;">
 
             <h3 class="history-title">
                 Riwayat Invoice
@@ -85,81 +90,168 @@
 
     </div>
 
-    <!-- INVOICE -->
-    <div class="invoice-wrapper" id="invoiceWrapper">
+    <!-- =========================
+         INVOICE
+    ========================== -->
+
+    <div class="invoice-wrapper"
+         id="invoiceWrapper">
 
         <div class="invoice-paper">
 
-            <div class="top-left" id="topDate"></div>
+            <!-- TOP -->
 
-            <div class="top-center" id="topInvoice"></div>
+            <div class="top-left"
+                 id="topDate">
+            </div>
+
+            <div class="top-center"
+                 id="topInvoice">
+            </div>
+
+            <!-- COMPANY -->
 
             <div class="company">
 
-                <h1>TS SERVICE SOREANG</h1>
+                <h1>
+                    TS SERVICE SOREANG
+                </h1>
 
                 <div class="address">
-                    Jl. Raya Soreang - Banjaran No.436, Kec. Soreang, Kab.Bandung
+                    Jl. Raya Soreang - Banjaran No.436,
+                    Kec. Soreang, Kab.Bandung
                 </div>
 
                 <div class="mobile">
                     Mobile: 081212005800 ,
-                    <span>https://tolerant-smartphone.com</span>
+                    <span>
+                        https://tolerant-smartphone.com
+                    </span>
                 </div>
 
             </div>
+
+            <!-- TITLE -->
 
             <div class="invoice-title">
                 Invoice
             </div>
 
+            <!-- INFO -->
+
             <div class="info-wrap">
+
+                <!-- LEFT -->
 
                 <div class="left-info">
 
                     <div class="row">
-                        <div class="label">Invoice No.</div>
-                        <div class="separator">:</div>
-                        <div id="showInvoiceNo"></div>
+
+                        <div class="label">
+                            Invoice No.
+                        </div>
+
+                        <div class="separator">
+                            :
+                        </div>
+
+                        <div class="value"
+                             id="showInvoiceNo">
+                        </div>
+
                     </div>
 
                     <div class="row">
-                        <div class="label">Customer</div>
-                        <div class="separator">:</div>
-                        <div id="showCustomer"></div>
+
+                        <div class="label">
+                            Customer
+                        </div>
+
+                        <div class="separator">
+                            :
+                        </div>
+
+                        <div class="value"
+                             id="showCustomer">
+                        </div>
+
                     </div>
 
                     <div class="row">
-                        <div class="label">Mobile</div>
-                        <div class="separator">:</div>
-                        <div id="showMobile"></div>
+
+                        <div class="label">
+                            Mobile
+                        </div>
+
+                        <div class="separator">
+                            :
+                        </div>
+
+                        <div class="value"
+                             id="showMobile">
+                        </div>
+
                     </div>
 
                 </div>
 
+                <!-- RIGHT -->
+
                 <div class="right-info">
 
                     <div class="row">
-                        <div class="label">Date</div>
-                        <div class="separator">:</div>
-                        <div id="showDate"></div>
+
+                        <div class="label">
+                            Date
+                        </div>
+
+                        <div class="separator">
+                            :
+                        </div>
+
+                        <div class="value"
+                             id="showDate">
+                        </div>
+
                     </div>
 
                     <div class="row">
-                        <div class="label">Type</div>
-                        <div class="separator">:</div>
-                        <div id="showType"></div>
+
+                        <div class="label">
+                            Type
+                        </div>
+
+                        <div class="separator">
+                            :
+                        </div>
+
+                        <div class="value"
+                             id="showType">
+                        </div>
+
                     </div>
 
                     <div class="row">
-                        <div class="label">Teknisi</div>
-                        <div class="separator">:</div>
-                        <div class="value" id="showTechnician"></div>
+
+                        <div class="label">
+                            Teknisi
+                        </div>
+
+                        <div class="separator">
+                            :
+                        </div>
+
+                        <div class="value"
+                             id="showTechnician">
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
+
+            <!-- FAULTY -->
 
             <div class="faulty">
 
@@ -170,6 +262,8 @@
                 <div id="showFaulty"></div>
 
             </div>
+
+            <!-- PRODUCT TABLE -->
 
             <table class="product-table">
 
@@ -215,23 +309,37 @@
 
             </table>
 
+            <!-- LINE -->
+
             <div class="line"></div>
+
+            <!-- TOTAL TABLE -->
 
             <table class="total-table">
 
                 <tr>
 
-                    <td width="22%" id="showPaymentMethod"></td>
+                    <td width="22%"
+                        id="showPaymentMethod">
+                    </td>
 
-                    <td width="18%" id="showPaidLeft"></td>
+                    <td width="18%"
+                        id="showPaidLeft">
+                    </td>
 
-                    <td width="17%" id="bottomDate"></td>
+                    <td width="17%"
+                        id="bottomDate">
+                    </td>
 
-                    <td width="18%" class="bold">
+                    <td width="18%"
+                        class="bold">
                         Subtotal:
                     </td>
 
-                    <td width="25%" class="right" id="showSubtotalBottom"></td>
+                    <td width="25%"
+                        class="right"
+                        id="showSubtotalBottom">
+                    </td>
 
                 </tr>
 
@@ -241,7 +349,9 @@
                         Total Paid
                     </td>
 
-                    <td class="bold" id="showTotalPaid"></td>
+                    <td class="bold"
+                        id="showTotalPaid">
+                    </td>
 
                     <td></td>
 
@@ -249,7 +359,9 @@
                         Discount:
                     </td>
 
-                    <td class="right" id="showDiscount"></td>
+                    <td class="right"
+                        id="showDiscount">
+                    </td>
 
                 </tr>
 
@@ -263,13 +375,19 @@
                         Total:
                     </td>
 
-                    <td class="right bold" id="showTotal"></td>
+                    <td class="right bold"
+                        id="showTotal">
+                    </td>
 
                 </tr>
 
             </table>
 
-            <div class="terbilang" id="terbilangText"></div>
+            <!-- TERBILANG -->
+
+            <div class="terbilang"
+                 id="terbilangText">
+            </div>
 
         </div>
 
@@ -293,14 +411,31 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+/* =========================
+   FIREBASE
+========================= */
+
 const firebaseConfig = {
+
   apiKey: "AIzaSyBeqqawnJUS3p8x0EIrtXoJeiCSwgtMzCg",
-  authDomain: "ts-service-soreang.firebaseapp.com",
-  projectId: "ts-service-soreang",
-  storageBucket: "ts-service-soreang.firebasestorage.app",
-  messagingSenderId: "220923770477",
-  appId: "1:220923770477:web:94489b72c22f5ec28d3164",
-  measurementId: "G-9P4FBQ3N90"
+
+  authDomain:
+  "ts-service-soreang.firebaseapp.com",
+
+  projectId:
+  "ts-service-soreang",
+
+  storageBucket:
+  "ts-service-soreang.firebasestorage.app",
+
+  messagingSenderId:
+  "220923770477",
+
+  appId:
+  "1:220923770477:web:94489b72c22f5ec28d3164",
+
+  measurementId:
+  "G-9P4FBQ3N90"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -308,6 +443,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 window.editId = null;
+
+/* =========================
+   HELPER
+========================= */
 
 function el(id){
     return document.getElementById(id);
@@ -319,68 +458,189 @@ function rupiah(number){
     .toLocaleString('id-ID');
 }
 
-function numberToWords(n){
+/* =========================
+   NUMBER TO WORDS (ENGLISH)
+========================= */
 
-    n = parseInt(n);
+function numberToWords(num){
 
-    return n.toLocaleString('id-ID') + ' Rupiah';
+    num = parseInt(num || 0);
+
+    if(num === 0){
+        return 'zero';
+    }
+
+    const ones = [
+        '', 'one', 'two', 'three', 'four',
+        'five', 'six', 'seven', 'eight',
+        'nine', 'ten', 'eleven', 'twelve',
+        'thirteen', 'fourteen', 'fifteen',
+        'sixteen', 'seventeen', 'eighteen',
+        'nineteen'
+    ];
+
+    const tens = [
+        '', '',
+        'twenty',
+        'thirty',
+        'forty',
+        'fifty',
+        'sixty',
+        'seventy',
+        'eighty',
+        'ninety'
+    ];
+
+    function convert(n){
+
+        if(n < 20){
+            return ones[n];
+        }
+
+        if(n < 100){
+
+            return tens[Math.floor(n / 10)] +
+            (n % 10
+                ? ' ' + ones[n % 10]
+                : '');
+        }
+
+        if(n < 1000){
+
+            return ones[Math.floor(n / 100)] +
+            ' hundred' +
+            (n % 100
+                ? ' ' + convert(n % 100)
+                : '');
+        }
+
+        if(n < 1000000){
+
+            return convert(
+                Math.floor(n / 1000)
+            ) +
+            ' thousand' +
+            (n % 1000
+                ? ' ' + convert(n % 1000)
+                : '');
+        }
+
+        if(n < 1000000000){
+
+            return convert(
+                Math.floor(n / 1000000)
+            ) +
+            ' million' +
+            (n % 1000000
+                ? ' ' + convert(n % 1000000)
+                : '');
+        }
+
+        return convert(
+            Math.floor(n / 1000000000)
+        ) +
+        ' billion' +
+        (n % 1000000000
+            ? ' ' + convert(n % 1000000000)
+            : '');
+    }
+
+    return convert(num);
 }
+
+/* =========================
+   CLOCK
+========================= */
 
 function realtimeClock(){
 
     const now = new Date();
 
-    el('topDate').innerText =
-        now.toLocaleString('id-ID');
-
-    const day =
+    const dd =
         String(now.getDate()).padStart(2,'0');
 
-    const month =
+    const mm =
         String(now.getMonth()+1).padStart(2,'0');
 
-    const year = now.getFullYear();
+    const yyyy =
+        now.getFullYear();
 
-    const hour =
+    const hh =
         String(now.getHours()).padStart(2,'0');
 
-    const minute =
+    const min =
         String(now.getMinutes()).padStart(2,'0');
 
+    const ss =
+        String(now.getSeconds()).padStart(2,'0');
+
+    el('topDate').innerText =
+        `${dd}/${mm}/${yyyy}, ${hh}.${min}.${ss}`;
+
     el('showDate').innerText =
-        `${day}-${month}-${year} ${hour}:${minute}`;
+        `${dd}-${mm}-${yyyy} ${hh}:${min}`;
 
     el('bottomDate').innerText =
-        `${day}-${month}-${year}`;
+        `${dd}-${mm}-${yyyy}`;
 }
+
+/* =========================
+   GENERATE INVOICE
+========================= */
 
 function generateInvoice(){
 
     const random4Digit =
-        Math.floor(1000 + Math.random() * 9000);
+        Math.floor(
+            1000 + Math.random() * 9000
+        );
 
-    const code = 'TSC' + random4Digit;
+    const code =
+        'TSC' + random4Digit;
 
     el('invoice_no').value = code;
 }
 
+/* =========================
+   UPDATE INVOICE
+========================= */
+
 function updateInvoice(){
 
-    const invoice = el('invoice_no').value;
-    const customer = el('customer').value;
-    const mobile = el('mobile').value;
-    const type = el('type').value;
-    const technician = el('technician').value;
-    const faulty = el('faulty').value;
-    const product = el('product').value;
-    const qty = el('qty').value;
+    const invoice =
+        el('invoice_no').value;
+
+    const customer =
+        el('customer').value;
+
+    const mobile =
+        el('mobile').value;
+
+    const type =
+        el('type').value;
+
+    const technician =
+        el('technician').value;
+
+    const faulty =
+        el('faulty').value;
+
+    const product =
+        el('product').value;
+
+    const qty =
+        el('qty').value;
 
     const qtyNum =
-    parseInt(qty.replace(/\D/g,'')) || 1;
+        parseInt(
+            qty.replace(/\D/g,'')
+        ) || 1;
 
-    const price = Number(el('price').value || 0);
+    const price =
+        Number(el('price').value || 0);
 
-    const subtotal = qtyNum * price;
+    const subtotal =
+        qtyNum * price;
 
     const discountPercent =
         Number(el('discount').value || 0);
@@ -388,27 +648,46 @@ function updateInvoice(){
     const discountAmount =
         subtotal * discountPercent / 100;
 
-    const total = subtotal - discountAmount;
+    const total =
+        subtotal - discountAmount;
 
-    const payment = el('payment').value;
+    const payment =
+        el('payment').value;
 
-    el('topInvoice').innerText = invoice;
+    /* SHOW */
 
-    el('showInvoiceNo').innerText = invoice;
-    el('showCustomer').innerText = customer;
-    el('showMobile').innerText = mobile;
+    el('topInvoice').innerText =
+        invoice;
 
-    el('showType').innerText = type;
-    el('showTechnician').innerText = technician;
+    el('showInvoiceNo').innerText =
+        invoice;
 
-    el('showFaulty').innerText = faulty;
+    el('showCustomer').innerText =
+        customer;
 
-    el('showProduct').innerText = product;
-    el('showQty').innerText = qty;
+    el('showMobile').innerText =
+        mobile;
 
-    el('showPrice').innerText = rupiah(price);
+    el('showType').innerText =
+        type;
 
-    el('showSubtotal').innerText = rupiah(subtotal);
+    el('showTechnician').innerText =
+        technician;
+
+    el('showFaulty').innerText =
+        faulty;
+
+    el('showProduct').innerText =
+        product;
+
+    el('showQty').innerText =
+        qty;
+
+    el('showPrice').innerText =
+        rupiah(price);
+
+    el('showSubtotal').innerText =
+        rupiah(subtotal);
 
     el('showSubtotalBottom').innerText =
         'Rp ' + rupiah(subtotal);
@@ -422,19 +701,25 @@ function updateInvoice(){
     el('showPaidLeft').innerText =
         'Rp ' + rupiah(total);
 
-    el('showPaymentMethod').innerText = payment;
+    el('showPaymentMethod').innerText =
+        payment;
+
+    /* DISCOUNT */
 
     if(discountPercent > 0){
 
         el('discountRow').style.display = '';
 
         el('showDiscount').innerText =
-            `(-) Rp ${rupiah(discountAmount)} (${discountPercent}%)`;
+        `(-) Rp ${rupiah(discountAmount)} (${discountPercent}%)`;
 
     }else{
 
-        el('discountRow').style.display = 'none';
+        el('discountRow').style.display =
+            'none';
     }
+
+    /* TERBILANG */
 
     el('terbilangText').innerText =
         '(' + numberToWords(total) + ')';
@@ -442,31 +727,59 @@ function updateInvoice(){
 
 window.updateInvoice = updateInvoice;
 
+/* =========================
+   SAVE
+========================= */
+
 async function saveInvoice(){
 
-    const customer = el('customer').value.trim();
+    const customer =
+        el('customer').value.trim();
 
     if(customer === ''){
 
         alert('Customer wajib diisi');
+
         return;
     }
 
     const data = {
 
-        invoice: el('invoice_no').value,
-        customer: el('customer').value,
-        mobile: el('mobile').value,
-        type: el('type').value,
-        technician: el('technician').value,
-        faulty: el('faulty').value,
-        product: el('product').value,
-        qty: el('qty').value,
-        price: Number(el('price').value || 0),
-        discount: Number(el('discount').value || 0),
-        payment: el('payment').value,
-        createdAt: new Date()
+        invoice:
+            el('invoice_no').value,
 
+        customer:
+            el('customer').value,
+
+        mobile:
+            el('mobile').value,
+
+        type:
+            el('type').value,
+
+        technician:
+            el('technician').value,
+
+        faulty:
+            el('faulty').value,
+
+        product:
+            el('product').value,
+
+        qty:
+            el('qty').value,
+
+        price:
+            Number(el('price').value || 0),
+
+        discount:
+            Number(el('discount').value || 0),
+
+        payment:
+            el('payment').value,
+
+        createdAt:
+            new Date()
     };
 
     try{
@@ -504,24 +817,32 @@ async function saveInvoice(){
 
 window.saveInvoice = saveInvoice;
 
+/* =========================
+   HISTORY
+========================= */
+
 function renderHistory(){
 
     onSnapshot(
         collection(db,"invoices"),
+
         (snapshot)=>{
 
             let html = '';
 
             snapshot.forEach((docSnap)=>{
 
-                const item = docSnap.data();
+                const item =
+                    docSnap.data();
 
                 html += `
 
                 <div class="history-box">
 
                     <div class="history-top">
+
                         <div>
+
                             <div class="history-invoice">
                                 ${item.invoice}
                             </div>
@@ -529,11 +850,13 @@ function renderHistory(){
                             <div class="history-name">
                                 ${item.customer}
                             </div>
+
                         </div>
 
                         <div class="history-price">
                             Rp ${rupiah(item.price)}
                         </div>
+
                     </div>
 
                     <div class="history-actions">
@@ -553,39 +876,66 @@ function renderHistory(){
                     </div>
 
                 </div>
-
                 `;
             });
 
-            el('history').innerHTML = html;
+            el('history').innerHTML =
+                html;
         }
     );
 }
+
+/* =========================
+   EDIT
+========================= */
 
 window.editInvoice = async function(id){
 
     onSnapshot(
         doc(db,"invoices",id),
+
         (docSnap)=>{
 
             if(!docSnap.exists())
                 return;
 
-            const data = docSnap.data();
+            const data =
+                docSnap.data();
 
             window.editId = id;
 
-            el('invoice_no').value = data.invoice;
-            el('customer').value = data.customer;
-            el('mobile').value = data.mobile;
-            el('type').value = data.type;
-            el('technician').value = data.technician;
-            el('faulty').value = data.faulty;
-            el('product').value = data.product;
-            el('qty').value = data.qty;
-            el('price').value = data.price;
-            el('discount').value = data.discount || 0;
-            el('payment').value = data.payment;
+            el('invoice_no').value =
+                data.invoice;
+
+            el('customer').value =
+                data.customer;
+
+            el('mobile').value =
+                data.mobile;
+
+            el('type').value =
+                data.type;
+
+            el('technician').value =
+                data.technician;
+
+            el('faulty').value =
+                data.faulty;
+
+            el('product').value =
+                data.product;
+
+            el('qty').value =
+                data.qty;
+
+            el('price').value =
+                data.price;
+
+            el('discount').value =
+                data.discount || 0;
+
+            el('payment').value =
+                data.payment;
 
             updateInvoice();
 
@@ -593,86 +943,126 @@ window.editInvoice = async function(id){
                 top:0,
                 behavior:'smooth'
             });
-
         }
     );
 };
 
-window.deleteInvoice = async function(id){
+/* =========================
+   DELETE
+========================= */
 
-    if(!confirm('Hapus invoice ini?'))
-        return;
+window.deleteInvoice =
+async function(id){
+
+    if(!confirm(
+        'Hapus invoice ini?'
+    )) return;
 
     await deleteDoc(
         doc(db,"invoices",id)
     );
 };
 
-window.printInvoice = function(){
+/* =========================
+   PRINT
+========================= */
+
+window.printInvoice =
+function(){
 
     window.print();
 };
 
-/* TOGGLE INVOICE */
+/* =========================
+   TOGGLE INVOICE
+========================= */
 
-const invoiceWrapper = el('invoiceWrapper');
-const toggleInvoiceBtn = el('toggleInvoiceBtn');
+const invoiceWrapper =
+    el('invoiceWrapper');
 
-toggleInvoiceBtn.addEventListener('click',()=>{
+const toggleInvoiceBtn =
+    el('toggleInvoiceBtn');
 
-    if(invoiceWrapper.style.display === 'none'){
+toggleInvoiceBtn
+.addEventListener('click',()=>{
 
-        invoiceWrapper.style.display = 'flex';
+    if(
+        invoiceWrapper.style.display
+        === 'none'
+    ){
+
+        invoiceWrapper.style.display =
+            'flex';
 
         toggleInvoiceBtn.innerText =
             'Sembunyikan Invoice';
 
     }else{
 
-        invoiceWrapper.style.display = 'none';
+        invoiceWrapper.style.display =
+            'none';
 
         toggleInvoiceBtn.innerText =
             'Tampilkan Invoice';
     }
-
 });
 
-/* TOGGLE HISTORY */
+/* =========================
+   TOGGLE HISTORY
+========================= */
 
-const historyContainer = el('historyContainer');
-const toggleHistoryBtn = el('toggleHistoryBtn');
+const historyContainer =
+    el('historyContainer');
 
-toggleHistoryBtn.addEventListener('click',()=>{
+const toggleHistoryBtn =
+    el('toggleHistoryBtn');
 
-    if(historyContainer.style.display === 'none'){
+toggleHistoryBtn
+.addEventListener('click',()=>{
 
-        historyContainer.style.display = 'block';
+    if(
+        historyContainer.style.display
+        === 'none'
+    ){
+
+        historyContainer.style.display =
+            'block';
 
         toggleHistoryBtn.innerText =
             'Sembunyikan Riwayat Invoice';
 
     }else{
 
-        historyContainer.style.display = 'none';
+        historyContainer.style.display =
+            'none';
 
         toggleHistoryBtn.innerText =
             'Lihat Riwayat Invoice';
     }
-
 });
 
+/* =========================
+   AUTO UPDATE
+========================= */
+
 document
-.querySelectorAll('input, textarea, select')
+.querySelectorAll(
+    'input, textarea, select'
+)
 .forEach(item=>{
 
     item.addEventListener(
         'input',
         updateInvoice
     );
-
 });
 
+/* =========================
+   INITIAL
+========================= */
+
 if(!el('invoice_no').value){
+
     generateInvoice();
 }
 
@@ -680,40 +1070,76 @@ updateInvoice();
 
 renderHistory();
 
-/* AUTO LOAD LAST INVOICE */
+/* =========================
+   AUTO LOAD LAST
+========================= */
 
 onSnapshot(
     collection(db,"invoices"),
+
     (snapshot)=>{
 
-        if(snapshot.empty) return;
+        if(snapshot.empty)
+            return;
 
-        const docs = snapshot.docs;
+        const docs =
+            snapshot.docs;
 
-        const last = docs[docs.length - 1];
+        const last =
+            docs[docs.length - 1];
 
-        const data = last.data();
+        const data =
+            last.data();
 
-        el('invoice_no').value = data.invoice;
-        el('customer').value = data.customer;
-        el('mobile').value = data.mobile;
-        el('type').value = data.type;
-        el('technician').value = data.technician;
-        el('faulty').value = data.faulty;
-        el('product').value = data.product;
-        el('qty').value = data.qty;
-        el('price').value = data.price;
-        el('discount').value = data.discount || 0;
-        el('payment').value = data.payment;
+        el('invoice_no').value =
+            data.invoice;
+
+        el('customer').value =
+            data.customer;
+
+        el('mobile').value =
+            data.mobile;
+
+        el('type').value =
+            data.type;
+
+        el('technician').value =
+            data.technician;
+
+        el('faulty').value =
+            data.faulty;
+
+        el('product').value =
+            data.product;
+
+        el('qty').value =
+            data.qty;
+
+        el('price').value =
+            data.price;
+
+        el('discount').value =
+            data.discount || 0;
+
+        el('payment').value =
+            data.payment;
 
         updateInvoice();
     }
 );
 
+/* =========================
+   CLOCK
+========================= */
+
 realtimeClock();
 
-setInterval(realtimeClock,1000);
+setInterval(
+    realtimeClock,
+    1000
+);
 
 </script>
+
 </body>
 </html>
