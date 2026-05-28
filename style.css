@@ -8,8 +8,11 @@ body{
     padding:0;
     background:#dcdcdc;
     font-family:Arial, Helvetica, sans-serif;
-    overflow-x:hidden;
 }
+
+/* =========================
+   WRAPPER
+========================= */
 
 .wrapper{
     display:flex;
@@ -23,84 +26,54 @@ body{
 ========================= */
 
 .form-panel{
-
     width:330px;
     min-width:330px;
-
     background:#fff;
-
     padding:20px;
-
     border-radius:8px;
-
-    box-shadow:0 0 10px rgba(0,0,0,0.08);
-
+    box-shadow:0 0 10px rgba(0,0,0,.08);
     max-height:95vh;
-
     overflow:auto;
 }
 
 .form-panel h2{
-
-    margin-top:0;
-    margin-bottom:20px;
-
+    margin:0 0 20px;
     font-size:24px;
 }
 
 label{
-
     display:block;
-
     margin-bottom:5px;
-
     font-size:14px;
-    font-weight:bold;
+    font-weight:700;
 }
 
 input,
 textarea,
 select{
-
     width:100%;
-
     padding:10px;
-
     margin-bottom:15px;
-
     border:1px solid #ccc;
-
     border-radius:4px;
-
     font-size:14px;
-
     font-family:Arial, Helvetica, sans-serif;
 }
 
 textarea{
-
     resize:vertical;
     min-height:70px;
 }
 
 button{
-
     width:100%;
-
     padding:12px;
-
     border:none;
-
     background:#0d6efd;
-
     color:#fff;
-
     border-radius:5px;
-
     font-size:16px;
-
     cursor:pointer;
-
     margin-bottom:10px;
 }
 
@@ -109,140 +82,108 @@ button:hover{
 }
 
 /* =========================
-   INVOICE
+   INVOICE WRAPPER
 ========================= */
 
 .invoice-wrapper{
-
     flex:1;
-
     display:flex;
-
     justify-content:center;
-
-    overflow:auto;
-}
-
-.invoice-paper{
-
-    width:794px;
-    min-width:794px;
-
-    min-height:1123px;
-
-    background:#fff;
-
-    position:relative;
-
-    overflow:hidden;
+    align-items:flex-start;
 }
 
 /* =========================
-   HEADER
+   PAPER
 ========================= */
 
-.top-left{
-
-    position:absolute;
-
-    top:18px;
-    left:27px;
-
-    font-size:11px;
+.invoice-paper{
+    width:794px;
+    height:1123px;
+    background:#fff;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 0 10px rgba(0,0,0,.08);
+    padding-top:34px;
 }
 
+/* =========================
+   HIDE TOP
+========================= */
+
+.top-left,
 .top-center{
-
-    position:absolute;
-
-    top:18px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    font-size:11px;
+    display:none;
 }
+
+/* =========================
+   COMPANY
+========================= */
 
 .company{
-
     text-align:center;
-
-    margin-top:72px;
+    margin-top:0;
 }
 
 .company h1{
-
     margin:0;
-
-    font-size:25px;
-
+    font-size:28px;
     font-weight:500;
-
     letter-spacing:-0.2px;
 }
 
 .address{
-
-    margin-top:11px;
-
-    font-size:11px;
+    margin-top:8px;
+    font-size:10px;
+    line-height:12px;
 }
 
 .mobile{
-
-    margin-top:3px;
-
-    font-size:11px;
-
-    font-weight:bold;
+    margin-top:2px;
+    font-size:10px;
+    font-weight:700;
 }
 
 .mobile span{
-    font-weight:normal;
-}
-
-.invoice-title{
-
-    text-align:center;
-
-    font-size:18px;
-
-    margin-top:10px;
+    font-weight:400;
 }
 
 /* =========================
-   INFO
+   TITLE
+========================= */
+
+.invoice-title{
+    text-align:center;
+    margin-top:10px;
+    font-size:17px;
+    font-weight:400;
+}
+
+/* =========================
+   INFO SECTION
 ========================= */
 
 .info-wrap{
-
     display:flex;
-
     justify-content:space-between;
-
-    gap:20px;
-
-    margin-top:12px;
-
-    padding-left:30px;
-    padding-right:30px;
+    margin-top:16px;
+    padding:0 30px;
 }
 
 .left-info,
 .right-info{
-
-    font-size:11px;
-
-    line-height:16px;
+    font-size:10px;
+    line-height:15px;
 }
 
 .left-info{
-    width:52%;
+    width:48%;
 }
 
 .right-info{
-    width:26%;
+    width:22%;
 }
+
+/* default row */
 
 .row{
     display:flex;
@@ -250,28 +191,44 @@ button:hover{
 }
 
 .label{
-
-    width:67px;
-
-    font-weight:bold;
-
+    width:74px;
+    font-weight:700;
     flex-shrink:0;
 }
 
 .separator{
-
-    width:9px;
-
+    width:8px;
     flex-shrink:0;
 }
 
 .value{
-
     flex:1;
-
     word-break:break-word;
+}
 
-    line-height:16px;
+/* =========================
+   CUSTOMER LIKE PDF
+========================= */
+
+.left-info .row:nth-child(2){
+    display:block;
+    margin-top:1px;
+}
+
+.left-info .row:nth-child(2) .label{
+    width:auto;
+    display:inline-block;
+}
+
+.left-info .row:nth-child(2) .separator{
+    width:auto;
+    display:inline-block;
+}
+
+.left-info .row:nth-child(2) .value{
+    display:block;
+    margin-top:2px;
+    margin-left:0;
 }
 
 /* =========================
@@ -279,135 +236,112 @@ button:hover{
 ========================= */
 
 .faulty{
-
-    margin-top:26px;
-
-    padding-left:30px;
-
-    padding-right:30px;
-
-    font-size:11px;
-
-    line-height:16px;
+    margin-top:18px;
+    padding:0 30px;
+    font-size:10px;
+    line-height:15px;
 }
 
 .faulty .title{
-    font-weight:bold;
+    font-weight:700;
+    margin-bottom:4px;
 }
 
 /* =========================
-   TABLE
+   PRODUCT TABLE
 ========================= */
 
 .product-table{
-
     width:calc(100% - 60px);
-
     margin-left:30px;
-
-    margin-top:18px;
-
+    margin-top:16px;
     border-collapse:collapse;
-
-    font-size:11px;
-
     table-layout:fixed;
+    font-size:10px;
 }
 
 .product-table th{
-
     text-align:left;
-
+    font-weight:700;
     padding-bottom:5px;
-
-    font-weight:bold;
+    border-bottom:1px solid #d9d9d9;
 }
 
 .product-table td{
+    padding-top:4px;
+    vertical-align:top;
+}
 
-    padding-top:6px;
-
-    word-break:break-word;
+.product-table tbody td{
+    padding-bottom:34px;
 }
 
 .product-table th:nth-child(2),
 .product-table td:nth-child(2){
-
     text-align:center;
+    width:90px;
 }
 
 .product-table th:nth-child(3),
 .product-table td:nth-child(3){
-
     text-align:right;
-
-    padding-right:28px;
+    width:110px;
 }
 
 .product-table th:nth-child(4),
 .product-table td:nth-child(4){
-
     text-align:right;
-
-    padding-right:0;
+    width:110px;
 }
 
 /* =========================
-   TOTAL
+   LINE
 ========================= */
 
 .line{
-
     width:calc(100% - 60px);
-
     margin-left:30px;
-
-    margin-top:34px;
-
-    border-top:1px solid #444;
+    border-top:1px solid #555;
+    margin-top:0;
 }
 
+/* =========================
+   TOTAL TABLE
+========================= */
+
 .total-table{
-
     width:calc(100% - 60px);
-
     margin-left:30px;
-
-    margin-top:15px;
-
+    margin-top:18px;
     border-collapse:collapse;
-
-    font-size:11px;
+    font-size:10px;
 }
 
 .total-table td{
-
     padding:1px 0;
-
+    line-height:15px;
     vertical-align:top;
 }
 
 .bold{
-    font-weight:bold;
+    font-weight:700;
 }
 
 .right{
     text-align:right;
 }
 
+/* =========================
+   TERBILANG
+========================= */
+
 .terbilang{
-
     width:calc(100% - 60px);
-
     margin-left:30px;
-
     margin-top:0;
-
     text-align:right;
-
-    font-size:10px;
-
-    line-height:14px;
+    font-size:9px;
+    line-height:13px;
 }
 
 /* =========================
@@ -415,36 +349,25 @@ button:hover{
 ========================= */
 
 .history-box{
-
     background:#f5f5f5;
-
     border:1px solid #ddd;
-
     border-radius:5px;
-
     padding:10px;
-
     margin-bottom:10px;
 }
 
 .history-box button{
-
     padding:8px;
-
     font-size:12px;
-
     margin-top:5px;
-
     margin-bottom:0;
 }
 
 .delete-btn{
-
     background:#dc3545;
 }
 
 .delete-btn:hover{
-
     background:#bb2d3b;
 }
 
@@ -452,32 +375,20 @@ button:hover{
    TABLET
 ========================= */
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width:1024px){
 
     .wrapper{
-
         flex-direction:column;
     }
 
     .form-panel{
-
         width:100%;
         min-width:100%;
-
         max-height:none;
     }
 
-    .invoice-wrapper{
-
-        width:100%;
-
-        overflow:auto;
-    }
-
     .invoice-paper{
-
-        transform:scale(0.9);
-
+        transform:scale(.9);
         transform-origin:top center;
     }
 }
@@ -486,47 +397,28 @@ button:hover{
    MOBILE
 ========================= */
 
-@media screen and (max-width: 768px){
-
-    body{
-        background:#fff;
-    }
+@media screen and (max-width:768px){
 
     .wrapper{
-
         padding:0;
-
         gap:0;
     }
 
     .form-panel{
-
         border-radius:0;
-
         box-shadow:none;
-
-        padding:15px;
     }
 
     .invoice-wrapper{
-
-        width:100%;
-
-        overflow-x:auto;
-
+        overflow:auto;
         padding:10px;
     }
 
     .invoice-paper{
-
         width:794px;
-
         min-width:794px;
-
-        transform:scale(0.65);
-
+        transform:scale(.65);
         transform-origin:top left;
-
         margin-bottom:-380px;
     }
 }
@@ -535,26 +427,11 @@ button:hover{
    SMALL MOBILE
 ========================= */
 
-@media screen and (max-width: 480px){
-
-    .form-panel h2{
-        font-size:20px;
-    }
-
-    input,
-    textarea,
-    select,
-    button{
-
-        font-size:14px;
-    }
+@media screen and (max-width:480px){
 
     .invoice-paper{
-
-        transform:scale(0.52);
-
+        transform:scale(.52);
         transform-origin:top left;
-
         margin-bottom:-520px;
     }
 }
@@ -565,65 +442,19 @@ button:hover{
 
 @media print{
 
+    @page{
+        size:A4 landscape;
+        margin:0;
+    }
+
     html,
     body{
-
-        width:210mm;
-        height:297mm;
-
-        background:#fff;
-    }
-
-    .form-panel{
-        display:none;
-    }
-
-    .wrapper{
-
-        padding:0;
-        margin:0;
-
-        display:block;
-    }
-
-    .invoice-wrapper{
-
-        display:block;
-
-        overflow:visible;
-    }
-
-    .invoice-paper{
-
-        width:210mm;
-        height:297mm;
-
-        min-width:auto;
-
-        transform:none !important;
-
-        margin:0 auto;
-
-        box-shadow:none;
-    }
-}
-
-@media print {
-
-    @page{
-        margin:0;
-    }
-
-    body{
-        margin:0;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-
-    /* HILANGKAN HEADER & FOOTER BROWSER */
-    body::before,
-    body::after{
-        display:none !important;
+        margin:0 !important;
+        padding:0 !important;
+        background:#fff !important;
+        overflow:hidden;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
     }
 
     .form-panel,
@@ -633,21 +464,23 @@ button:hover{
         display:none !important;
     }
 
-    .invoice-wrapper{
-        width:100%;
-        display:flex !important;
-        justify-content:center;
-        align-items:flex-start;
+    .wrapper{
         margin:0;
         padding:0;
+        display:block;
+    }
+
+    .invoice-wrapper{
+        margin:0;
+        padding:0;
+        display:block;
     }
 
     .invoice-paper{
-        width:210mm;
-        min-height:auto;
-        margin:0;
-        box-shadow:none;
-        page-break-after:avoid;
+        width:100vw !important;
+        height:100vh !important;
+        box-shadow:none !important;
+        transform:none !important;
+        margin:0 !important;
     }
-
 }
