@@ -8,6 +8,8 @@ body{
     padding:0;
     background:#dcdcdc;
     font-family:Arial, Helvetica, sans-serif;
+    width:794px;
+    height:1123px;
 }
 
 /* =========================
@@ -429,11 +431,14 @@ button:hover{
 
 @media screen and (max-width:480px){
 
-    .invoice-paper{
-        transform:scale(.52);
-        transform-origin:top left;
-        margin-bottom:-520px;
-    }
+  .invoice-paper{
+    width:794px !important;
+    height:1123px !important;
+    box-shadow:none !important;
+    transform:none !important;
+    margin:0 auto !important;
+    overflow:hidden !important;
+}
 }
 
 /* =========================
@@ -443,7 +448,7 @@ button:hover{
 @media print{
 
     @page{
-        size:A4 landscape;
+        size:A4 portrait;
         margin:0;
     }
 
@@ -452,9 +457,41 @@ button:hover{
         margin:0 !important;
         padding:0 !important;
         background:#fff !important;
-        overflow:hidden;
         -webkit-print-color-adjust:exact;
         print-color-adjust:exact;
+    }
+
+    body *{
+        visibility:hidden;
+    }
+
+    .invoice-paper,
+    .invoice-paper *{
+        visibility:visible;
+    }
+
+    .invoice-paper{
+        position:absolute;
+        left:0;
+        top:0;
+
+        width:794px !important;
+        height:1123px !important;
+
+        margin:0 !important;
+        padding-top:34px !important;
+
+        overflow:visible !important;
+        box-shadow:none !important;
+
+        transform:none !important;
+    }
+
+    .wrapper,
+    .invoice-wrapper{
+        display:block !important;
+        margin:0 !important;
+        padding:0 !important;
     }
 
     .form-panel,
@@ -462,25 +499,5 @@ button:hover{
     #toggleHistoryBtn,
     #historyContainer{
         display:none !important;
-    }
-
-    .wrapper{
-        margin:0;
-        padding:0;
-        display:block;
-    }
-
-    .invoice-wrapper{
-        margin:0;
-        padding:0;
-        display:block;
-    }
-
-    .invoice-paper{
-        width:100vw !important;
-        height:100vh !important;
-        box-shadow:none !important;
-        transform:none !important;
-        margin:0 !important;
     }
 }
