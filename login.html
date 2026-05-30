@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>POS - Tolerant Smartphone</title>
+<title>Invoice TS SERVICE SOREANG</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -77,11 +77,51 @@
 
         <!-- HISTORY -->
 
-        <div id="historyContainer"
-             style="display:none; margin-top:15px;">
+
+        
+
+
+       <div id="historyContainer"
+     style="display:none; margin-top:15px;">
+
+    <h3 class="history-title">
+        Riwayat Invoice
+    </h3>
+
+    <div class="history-filter">
+
+        <select id="historyDateFilter">
+
+            <option value="all">
+                Semua Invoice
+            </option>
+
+            <option value="today">
+                Hari Ini
+            </option>
+
+            <option value="yesterday">
+                Kemarin
+            </option>
+
+            <option value="week">
+                7 Hari Terakhir
+            </option>
+
+            <option value="month">
+                Bulan Ini
+            </option>
+
+        </select>
+
+    </div>
+
+    <div id="history"></div>
+
+</div>
 
             <h3 class="history-title">
-                Riwayat Invoice
+             
             </h3>
 
             <div id="history"></div>
@@ -821,7 +861,7 @@ window.saveInvoice = saveInvoice;
    HISTORY
 ========================= */
 
-function renderHistory(){
+function renderHistory(filter = "all"){
 
     onSnapshot(
         collection(db,"invoices"),
@@ -830,14 +870,91 @@ function renderHistory(){
 
             let html = '';
 
+            const now = new Date();
+
             snapshot.forEach((docSnap)=>{
 
-                const item =
-                    docSnap.data();
+                const item = docSnap.data();
+
+                if(!item.createdAt) return;
+
+                let invoiceDate;
+
+                if(item.createdAt.toDate){
+
+                    invoiceDate =
+                        item.createdAt.toDate();
+
+                }else{
+
+                    invoiceDate =
+                        new Date(item.createdAt);
+                }
+
+                let show = true;
+
+                if(filter === "today"){
+
+                    show =
+                        invoiceDate.toDateString()
+                        === now.toDateString();
+                }
+
+                if(filter === "yesterday"){
+
+                    const yesterday =
+                        new Date();
+
+                    yesterday.setDate(
+                        yesterday.getDate() - 1
+                    );
+
+                    show =
+                        invoiceDate.toDateString()
+                        === yesterday.toDateString();
+                }
+
+                if(filter === "week"){
+
+                    const weekAgo =
+                        new Date();
+
+                    weekAgo.setDate(
+                        weekAgo.getDate() - 7
+                    );
+
+                    show =
+                        invoiceDate >= weekAgo;
+                }
+
+                if(filter === "month"){
+
+                    show =
+                        invoiceDate.getMonth()
+                        === now.getMonth()
+                        &&
+                        invoiceDate.getFullYear()
+                        === now.getFullYear();
+                }
+
+                if(!show) return;
+
+                const tanggal =
+                    invoiceDate.toLocaleDateString(
+                        'id-ID'
+                    );
 
                 html += `
 
                 <div class="history-box">
+
+                    <div style="
+                        font-size:12px;
+                        color:#666;
+                        margin-bottom:6px;
+                    ">
+                        ${tanggal}
+                    </div>
 
                     <div class="history-top">
 
@@ -878,6 +995,15 @@ function renderHistory(){
                 </div>
                 `;
             });
+
+            if(html === ''){
+
+                html = `
+                    <div class="history-box">
+                        Tidak ada invoice ditemukan
+                    </div>
+                `;
+            }
 
             el('history').innerHTML =
                 html;
@@ -1069,6 +1195,17 @@ if(!el('invoice_no').value){
 updateInvoice();
 
 renderHistory();
+
+const historyDateFilter =
+    el("historyDateFilter");
+
+historyDateFilter.addEventListener(
+    "change",
+    function(){
+
+        renderHistory(this.value);
+    }
+);
 
 /* =========================
    AUTO LOAD LAST
