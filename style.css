@@ -528,15 +528,21 @@ button:active{
    PRINT
 ========================= */
 
+/* =========================
+   PRINT A4 PORTRAIT
+========================= */
+
 @media print{
 
     @page{
-        size:A4 landscape;
+        size:A4 portrait;
         margin:0;
     }
 
     html,
     body{
+        width:210mm;
+        height:297mm;
         margin:0 !important;
         padding:0 !important;
         background:#fff !important;
@@ -553,22 +559,26 @@ button:active{
     }
 
     .wrapper{
-        margin:0;
-        padding:0;
-        display:block;
+        margin:0 !important;
+        padding:0 !important;
+        display:block !important;
     }
 
     .invoice-wrapper{
-        margin:0;
-        padding:0;
-        display:block;
+        margin:0 !important;
+        padding:0 !important;
+        display:block !important;
     }
 
     .invoice-paper{
-        width:100vw !important;
-        height:100vh !important;
+        width:210mm !important;
+        height:297mm !important;
+        max-width:none !important;
+        max-height:none !important;
         box-shadow:none !important;
         transform:none !important;
         margin:0 !important;
+        overflow:hidden !important;
+        page-break-after:avoid;
     }
 }
