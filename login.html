@@ -1,132 +1,237 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Invoice TS SERVICE SOREANG</title>
+    <title>TSM POS</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<div class="wrapper">
+    <div class="wrapper">
 
-    <!-- =========================
+        <!-- =========================
          FORM PANEL
     ========================== -->
 
-    <div class="form-panel">
+        <div class="form-panel">
 
-        <h2>Input Invoice</h2>
+            <h2>Input Invoice</h2>
 
-        <label>Invoice Number</label>
-        <input type="text" id="invoice_no">
+            <label>Invoice Number</label>
+            <input type="text" id="invoice_no">
 
-        <label>Customer</label>
-        <input type="text" id="customer">
+            <label>Customer</label>
+            <input type="text" id="customer">
 
-        <label>Mobile Phone</label>
-        <input type="text" id="mobile" value="-">
+            <label>Mobile Phone</label>
+            <input type="text" id="mobile" value="-">
 
-        <label>Type</label>
-        <input type="text" id="type">
+            <label>Type</label>
 
-        <label>Nama Teknisi</label>
-        <input type="text" id="technician">
+            <input type="text" id="type" list="brandList" placeholder="Pilih atau ketik merk HP">
 
-        <label>Faulty</label>
-        <textarea id="faulty"></textarea>
+            <datalist id="brandList">
+                <option value="OPPO">
+                <option value="VIVO">
+                <option value="SAMSUNG">
+                <option value="XIAOMI">
+                <option value="REALME">
+                <option value="INFINIX">
+                <option value="TECNO">
+                <option value="ITEL">
+                <option value="IPHONE">
+                <option value="ASUS">
+                <option value="LENOVO">
+                <option value="HUAWEI">
+                <option value="HONOR">
+                <option value="NOKIA">
+                <option value="SONY">
+                <option value="LG">
+                <option value="GOOGLE PIXEL">
+                <option value="BLACK SHARK">
+                <option value="REDMAGIC">
+                <option value="POCO">
+                <option value="ZTE">
+                <option value="MEIZU">
+                <option value="ONEPLUS">
+                <option value="NOTHING PHONE">
+            </datalist>
 
-        <label>Produk / Jasa</label>
-        <input type="text" id="product">
+            <label>Nama Teknisi</label>
 
-        <label>Qty</label>
-        <input type="text" id="qty" value="1 PCS">
+            <select id="technician">
 
-        <label>Harga</label>
-        <input type="number" id="price">
+                <option value="">
+                    Pilih Teknisi
+                </option>
 
-        <label>Diskon (%)</label>
-        <input type="number" id="discount" placeholder="Contoh: 10">
+                <option value="Candra Lesmana">
+                    Candra Lesmana
+                </option>
 
-        <label>Payment Method</label>
+                <option value="Maman Rohman Saefudin">
+                    Maman Rohman Saefudin
+                </option>
 
-        <select id="payment">
-            <option value="Tunai">Tunai</option>
-            <option value="Transfer">Transfer</option>
-        </select>
+            </select>
 
-        <button onclick="saveInvoice()">
-            SIMPAN INVOICE
-        </button>
+            <label>Faulty</label>
+            <textarea id="faulty"></textarea>
 
-        <button onclick="printInvoice()">
-            PRINT INVOICE
-        </button>
+            <label>Produk / Jasa</label>
+            <input type="text" id="product">
 
-        <button type="button" id="toggleInvoiceBtn">
-            Sembunyikan Invoice
-        </button>
+            <label>Qty</label>
+            <input type="text" id="qty" value="1 PCS">
 
-        <button type="button" id="toggleHistoryBtn">
-            Lihat Riwayat Invoice
-        </button>
+            <label>Harga</label>
+            <input type="number" id="price">
+
+            <label>Diskon (%)</label>
+            <input type="number" id="discount" placeholder="Contoh: 10">
+
+            <label>Payment Method</label>
+
+            <select id="payment">
+                <option value="Tunai">Tunai</option>
+                <option value="Transfer">Transfer</option>
+            </select>
+
+            <button onclick="saveInvoice()">
+                SIMPAN INVOICE
+            </button>
+
+            <button onclick="printInvoice()">
+                PRINT INVOICE
+            </button>
+
+            <button type="button" id="toggleInvoiceBtn">
+                Sembunyikan Invoice
+            </button>
+
+            <button type="button" id="toggleHistoryBtn">
+                Lihat Riwayat Invoice
+            </button>
+
+            <div id="transactionSummary" style="
+margin-top:15px;
+padding:12px;
+border:1px solid #ddd;
+border-radius:8px;
+background:#fff;
+">
+
+                <h3 style="margin-bottom:10px;">
+                    Total Pembayaran Sukses
+                </h3>
+
+                <select id="transactionFilter" style="
+width:100%;
+padding:8px;
+margin-bottom:10px;
+">
+
+                    <option value="all">
+                        Semua Transaksi
+                    </option>
+
+                    <option value="today">
+                        Hari Ini
+                    </option>
+
+                    <option value="yesterday">
+                        Kemarin
+                    </option>
+
+                    <option value="week">
+                        7 Hari Terakhir
+                    </option>
+
+                    <option value="month">
+                        Bulan Ini
+                    </option>
+
+                    <option value="year">
+                        Tahun Ini
+                    </option>
+
+                </select>
+
+                <div>
+                    Total Transaksi:
+                    <strong id="grandTotal">
+                        Rp 0
+                    </strong>
+                </div>
+
+                <div style="margin-top:5px;">
+                    Jumlah Invoice:
+                    <strong id="totalInvoiceCount">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
 
         <!-- HISTORY -->
 
 
-        
 
 
-       <div id="historyContainer"
-     style="display:none; margin-top:15px;">
 
-    <h3 class="history-title">
-        Riwayat Invoice
-    </h3>
-
-    <div class="history-filter">
-
-        <select id="historyDateFilter">
-
-            <option value="all">
-                Semua Invoice
-            </option>
-
-            <option value="today">
-                Hari Ini
-            </option>
-
-            <option value="yesterday">
-                Kemarin
-            </option>
-
-            <option value="week">
-                7 Hari Terakhir
-            </option>
-
-            <option value="month">
-                Bulan Ini
-            </option>
-
-        </select>
-
-    </div>
-
-    <div id="history"></div>
-
-</div>
+        <div id="historyContainer" style="display:none; margin-top:15px;">
 
             <h3 class="history-title">
-             
+                Riwayat Invoice
             </h3>
+
+            <div class="history-filter">
+
+                <select id="historyDateFilter">
+
+                    <option value="all">
+                        Semua Invoice
+                    </option>
+
+                    <option value="today">
+                        Hari Ini
+                    </option>
+
+                    <option value="yesterday">
+                        Kemarin
+                    </option>
+
+                    <option value="week">
+                        7 Hari Terakhir
+                    </option>
+
+                    <option value="month">
+                        Bulan Ini
+                    </option>
+
+                </select>
+
+            </div>
 
             <div id="history"></div>
 
         </div>
+
+        <h3 class="history-title">
+
+        </h3>
+
+        <div id="history"></div>
+
+    </div>
 
     </div>
 
@@ -134,19 +239,16 @@
          INVOICE
     ========================== -->
 
-    <div class="invoice-wrapper"
-         id="invoiceWrapper">
+    <div class="invoice-wrapper" id="invoiceWrapper" style="display:none;">
 
         <div class="invoice-paper">
 
             <!-- TOP -->
 
-            <div class="top-left"
-                 id="topDate">
+            <div class="top-left" id="topDate">
             </div>
 
-            <div class="top-center"
-                 id="topInvoice">
+            <div class="top-center" id="topInvoice">
             </div>
 
             <!-- COMPANY -->
@@ -195,8 +297,7 @@
                             :
                         </div>
 
-                        <div class="value"
-                             id="showInvoiceNo">
+                        <div class="value" id="showInvoiceNo">
                         </div>
 
                     </div>
@@ -211,8 +312,7 @@
                             :
                         </div>
 
-                        <div class="value"
-                             id="showCustomer">
+                        <div class="value" id="showCustomer">
                         </div>
 
                     </div>
@@ -227,8 +327,7 @@
                             :
                         </div>
 
-                        <div class="value"
-                             id="showMobile">
+                        <div class="value" id="showMobile">
                         </div>
 
                     </div>
@@ -249,8 +348,7 @@
                             :
                         </div>
 
-                        <div class="value"
-                             id="showDate">
+                        <div class="value" id="showDate">
                         </div>
 
                     </div>
@@ -265,8 +363,7 @@
                             :
                         </div>
 
-                        <div class="value"
-                             id="showType">
+                        <div class="value" id="showType">
                         </div>
 
                     </div>
@@ -281,8 +378,7 @@
                             :
                         </div>
 
-                        <div class="value"
-                             id="showTechnician">
+                        <div class="value" id="showTechnician">
                         </div>
 
                     </div>
@@ -359,26 +455,20 @@
 
                 <tr>
 
-                    <td width="22%"
-                        id="showPaymentMethod">
+                    <td width="22%" id="showPaymentMethod">
                     </td>
 
-                    <td width="18%"
-                        id="showPaidLeft">
+                    <td width="18%" id="showPaidLeft">
                     </td>
 
-                    <td width="17%"
-                        id="bottomDate">
+                    <td width="17%" id="bottomDate">
                     </td>
 
-                    <td width="18%"
-                        class="bold">
+                    <td width="18%" class="bold">
                         Subtotal:
                     </td>
 
-                    <td width="25%"
-                        class="right"
-                        id="showSubtotalBottom">
+                    <td width="25%" class="right" id="showSubtotalBottom">
                     </td>
 
                 </tr>
@@ -389,8 +479,7 @@
                         Total Paid
                     </td>
 
-                    <td class="bold"
-                        id="showTotalPaid">
+                    <td class="bold" id="showTotalPaid">
                     </td>
 
                     <td></td>
@@ -399,8 +488,7 @@
                         Discount:
                     </td>
 
-                    <td class="right"
-                        id="showDiscount">
+                    <td class="right" id="showDiscount">
                     </td>
 
                 </tr>
@@ -415,8 +503,7 @@
                         Total:
                     </td>
 
-                    <td class="right bold"
-                        id="showTotal">
+                    <td class="right bold" id="showTotal">
                     </td>
 
                 </tr>
@@ -425,526 +512,649 @@
 
             <!-- TERBILANG -->
 
-            <div class="terbilang"
-                 id="terbilangText">
+            <div class="terbilang" id="terbilangText">
             </div>
 
         </div>
 
     </div>
 
-</div>
+    </div>
 
-<script type="module">
+    <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { initializeApp }
+            from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    onSnapshot,
-    deleteDoc,
-    doc,
-    updateDoc
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            onSnapshot,
+            deleteDoc,
+            doc,
+            updateDoc
+        }
+            from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* =========================
-   FIREBASE
-========================= */
+        /* =========================
+           FIREBASE
+        ========================= */
 
-const firebaseConfig = {
+        const firebaseConfig = {
 
-  apiKey: "AIzaSyBeqqawnJUS3p8x0EIrtXoJeiCSwgtMzCg",
+            apiKey: "AIzaSyBeqqawnJUS3p8x0EIrtXoJeiCSwgtMzCg",
 
-  authDomain:
-  "ts-service-soreang.firebaseapp.com",
+            authDomain:
+                "ts-service-soreang.firebaseapp.com",
 
-  projectId:
-  "ts-service-soreang",
+            projectId:
+                "ts-service-soreang",
 
-  storageBucket:
-  "ts-service-soreang.firebasestorage.app",
+            storageBucket:
+                "ts-service-soreang.firebasestorage.app",
 
-  messagingSenderId:
-  "220923770477",
+            messagingSenderId:
+                "220923770477",
 
-  appId:
-  "1:220923770477:web:94489b72c22f5ec28d3164",
+            appId:
+                "1:220923770477:web:94489b72c22f5ec28d3164",
 
-  measurementId:
-  "G-9P4FBQ3N90"
-};
+            measurementId:
+                "G-9P4FBQ3N90"
+        };
 
-const app = initializeApp(firebaseConfig);
+        const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+        const db = getFirestore(app);
 
-window.editId = null;
+        window.editId = null;
 
-/* =========================
-   HELPER
-========================= */
+        /* =========================
+           HELPER
+        ========================= */
 
-function el(id){
-    return document.getElementById(id);
-}
-
-function rupiah(number){
-
-    return Number(number || 0)
-    .toLocaleString('id-ID');
-}
-
-/* =========================
-   NUMBER TO WORDS (ENGLISH)
-========================= */
-
-function numberToWords(num){
-
-    num = parseInt(num || 0);
-
-    if(num === 0){
-        return 'zero';
-    }
-
-    const ones = [
-        '', 'one', 'two', 'three', 'four',
-        'five', 'six', 'seven', 'eight',
-        'nine', 'ten', 'eleven', 'twelve',
-        'thirteen', 'fourteen', 'fifteen',
-        'sixteen', 'seventeen', 'eighteen',
-        'nineteen'
-    ];
-
-    const tens = [
-        '', '',
-        'twenty',
-        'thirty',
-        'forty',
-        'fifty',
-        'sixty',
-        'seventy',
-        'eighty',
-        'ninety'
-    ];
-
-    function convert(n){
-
-        if(n < 20){
-            return ones[n];
+        function el(id) {
+            return document.getElementById(id);
         }
 
-        if(n < 100){
+        function rupiah(number) {
 
-            return tens[Math.floor(n / 10)] +
-            (n % 10
-                ? ' ' + ones[n % 10]
-                : '');
+            return Number(number || 0)
+                .toLocaleString('id-ID');
         }
 
-        if(n < 1000){
+        function updateGrandTotal(filter = "all") {
 
-            return ones[Math.floor(n / 100)] +
-            ' hundred' +
-            (n % 100
-                ? ' ' + convert(n % 100)
-                : '');
-        }
+            onSnapshot(
+                collection(db, "successful_transactions"),
 
-        if(n < 1000000){
+                (snapshot) => {
 
-            return convert(
-                Math.floor(n / 1000)
-            ) +
-            ' thousand' +
-            (n % 1000
-                ? ' ' + convert(n % 1000)
-                : '');
-        }
+                    let total = 0;
+                    let count = 0;
 
-        if(n < 1000000000){
+                    const now = new Date();
 
-            return convert(
-                Math.floor(n / 1000000)
-            ) +
-            ' million' +
-            (n % 1000000
-                ? ' ' + convert(n % 1000000)
-                : '');
-        }
+                    snapshot.forEach((docSnap) => {
 
-        return convert(
-            Math.floor(n / 1000000000)
-        ) +
-        ' billion' +
-        (n % 1000000000
-            ? ' ' + convert(n % 1000000000)
-            : '');
-    }
+                        const item = docSnap.data();
 
-    return convert(num);
-}
+                        if (!item.printedAt) return;
 
-/* =========================
-   CLOCK
-========================= */
+                        let trxDate;
 
-function realtimeClock(){
+                        if (item.printedAt.toDate) {
 
-    const now = new Date();
+                            trxDate =
+                                item.printedAt.toDate();
 
-    const dd =
-        String(now.getDate()).padStart(2,'0');
+                        } else {
 
-    const mm =
-        String(now.getMonth()+1).padStart(2,'0');
+                            trxDate =
+                                new Date(item.printedAt);
+                        }
 
-    const yyyy =
-        now.getFullYear();
+                        let show = true;
 
-    const hh =
-        String(now.getHours()).padStart(2,'0');
+                        if (filter === "today") {
 
-    const min =
-        String(now.getMinutes()).padStart(2,'0');
+                            show =
+                                trxDate.toDateString()
+                                === now.toDateString();
+                        }
 
-    const ss =
-        String(now.getSeconds()).padStart(2,'0');
+                        if (filter === "yesterday") {
 
-    el('topDate').innerText =
-        `${dd}/${mm}/${yyyy}, ${hh}.${min}.${ss}`;
+                            const yesterday =
+                                new Date();
 
-    el('showDate').innerText =
-        `${dd}-${mm}-${yyyy} ${hh}:${min}`;
+                            yesterday.setDate(
+                                yesterday.getDate() - 1
+                            );
 
-    el('bottomDate').innerText =
-        `${dd}-${mm}-${yyyy}`;
-}
+                            show =
+                                trxDate.toDateString()
+                                === yesterday.toDateString();
+                        }
 
-/* =========================
-   GENERATE INVOICE
-========================= */
+                        if (filter === "week") {
 
-function generateInvoice(){
+                            const weekAgo =
+                                new Date();
 
-    const random4Digit =
-        Math.floor(
-            1000 + Math.random() * 9000
-        );
+                            weekAgo.setDate(
+                                weekAgo.getDate() - 7
+                            );
 
-    const code =
-        'TSC' + random4Digit;
+                            show =
+                                trxDate >= weekAgo;
+                        }
 
-    el('invoice_no').value = code;
-}
+                        if (filter === "month") {
 
-/* =========================
-   UPDATE INVOICE
-========================= */
+                            show =
+                                trxDate.getMonth()
+                                === now.getMonth()
+                                &&
+                                trxDate.getFullYear()
+                                === now.getFullYear();
+                        }
 
-function updateInvoice(){
+                        if (filter === "year") {
 
-    const invoice =
-        el('invoice_no').value;
+                            show =
+                                trxDate.getFullYear()
+                                === now.getFullYear();
+                        }
 
-    const customer =
-        el('customer').value;
+                        if (!show) return;
 
-    const mobile =
-        el('mobile').value;
+                        total += Number(
+                            item.total || 0
+                        );
 
-    const type =
-        el('type').value;
+                        count++;
+                    });
 
-    const technician =
-        el('technician').value;
+                    el("grandTotal").innerText =
+                        "Rp " + rupiah(total);
 
-    const faulty =
-        el('faulty').value;
-
-    const product =
-        el('product').value;
-
-    const qty =
-        el('qty').value;
-
-    const qtyNum =
-        parseInt(
-            qty.replace(/\D/g,'')
-        ) || 1;
-
-    const price =
-        Number(el('price').value || 0);
-
-    const subtotal =
-        qtyNum * price;
-
-    const discountPercent =
-        Number(el('discount').value || 0);
-
-    const discountAmount =
-        subtotal * discountPercent / 100;
-
-    const total =
-        subtotal - discountAmount;
-
-    const payment =
-        el('payment').value;
-
-    /* SHOW */
-
-    el('topInvoice').innerText =
-        invoice;
-
-    el('showInvoiceNo').innerText =
-        invoice;
-
-    el('showCustomer').innerText =
-        customer;
-
-    el('showMobile').innerText =
-        mobile;
-
-    el('showType').innerText =
-        type;
-
-    el('showTechnician').innerText =
-        technician;
-
-    el('showFaulty').innerText =
-        faulty;
-
-    el('showProduct').innerText =
-        product;
-
-    el('showQty').innerText =
-        qty;
-
-    el('showPrice').innerText =
-        rupiah(price);
-
-    el('showSubtotal').innerText =
-        rupiah(subtotal);
-
-    el('showSubtotalBottom').innerText =
-        'Rp ' + rupiah(subtotal);
-
-    el('showTotal').innerText =
-        'Rp ' + rupiah(total);
-
-    el('showTotalPaid').innerText =
-        'Rp ' + rupiah(total);
-
-    el('showPaidLeft').innerText =
-        'Rp ' + rupiah(total);
-
-    el('showPaymentMethod').innerText =
-        payment;
-
-    /* DISCOUNT */
-
-    if(discountPercent > 0){
-
-        el('discountRow').style.display = '';
-
-        el('showDiscount').innerText =
-        `(-) Rp ${rupiah(discountAmount)} (${discountPercent}%)`;
-
-    }else{
-
-        el('discountRow').style.display =
-            'none';
-    }
-
-    /* TERBILANG */
-
-    el('terbilangText').innerText =
-        '(' + numberToWords(total) + ')';
-}
-
-window.updateInvoice = updateInvoice;
-
-/* =========================
-   SAVE
-========================= */
-
-async function saveInvoice(){
-
-    const customer =
-        el('customer').value.trim();
-
-    if(customer === ''){
-
-        alert('Customer wajib diisi');
-
-        return;
-    }
-
-    const data = {
-
-        invoice:
-            el('invoice_no').value,
-
-        customer:
-            el('customer').value,
-
-        mobile:
-            el('mobile').value,
-
-        type:
-            el('type').value,
-
-        technician:
-            el('technician').value,
-
-        faulty:
-            el('faulty').value,
-
-        product:
-            el('product').value,
-
-        qty:
-            el('qty').value,
-
-        price:
-            Number(el('price').value || 0),
-
-        discount:
-            Number(el('discount').value || 0),
-
-        payment:
-            el('payment').value,
-
-        createdAt:
-            new Date()
-    };
-
-    try{
-
-        if(window.editId){
-
-            await updateDoc(
-                doc(db,"invoices",window.editId),
-                data
+                    el("totalInvoiceCount").innerText =
+                        count;
+                }
             );
+        }
+        /* =========================
+           NUMBER TO WORDS (ENGLISH)
+        ========================= */
 
-            alert("Invoice berhasil diupdate");
+        function numberToWords(num) {
 
-            window.editId = null;
+            num = parseInt(num || 0);
 
-        }else{
+            if (num === 0) {
+                return 'zero';
+            }
 
-            await addDoc(
-                collection(db,"invoices"),
-                data
-            );
+            const ones = [
+                '', 'one', 'two', 'three', 'four',
+                'five', 'six', 'seven', 'eight',
+                'nine', 'ten', 'eleven', 'twelve',
+                'thirteen', 'fourteen', 'fifteen',
+                'sixteen', 'seventeen', 'eighteen',
+                'nineteen'
+            ];
 
-            alert("Invoice berhasil disimpan");
+            const tens = [
+                '', '',
+                'twenty',
+                'thirty',
+                'forty',
+                'fifty',
+                'sixty',
+                'seventy',
+                'eighty',
+                'ninety'
+            ];
+
+            function convert(n) {
+
+                if (n < 20) {
+                    return ones[n];
+                }
+
+                if (n < 100) {
+
+                    return tens[Math.floor(n / 10)] +
+                        (n % 10
+                            ? ' ' + ones[n % 10]
+                            : '');
+                }
+
+                if (n < 1000) {
+
+                    return ones[Math.floor(n / 100)] +
+                        ' hundred' +
+                        (n % 100
+                            ? ' ' + convert(n % 100)
+                            : '');
+                }
+
+                if (n < 1000000) {
+
+                    return convert(
+                        Math.floor(n / 1000)
+                    ) +
+                        ' thousand' +
+                        (n % 1000
+                            ? ' ' + convert(n % 1000)
+                            : '');
+                }
+
+                if (n < 1000000000) {
+
+                    return convert(
+                        Math.floor(n / 1000000)
+                    ) +
+                        ' million' +
+                        (n % 1000000
+                            ? ' ' + convert(n % 1000000)
+                            : '');
+                }
+
+                return convert(
+                    Math.floor(n / 1000000000)
+                ) +
+                    ' billion' +
+                    (n % 1000000000
+                        ? ' ' + convert(n % 1000000000)
+                        : '');
+            }
+
+            return convert(num);
         }
 
-        generateInvoice();
+        /* =========================
+           CLOCK
+        ========================= */
 
-    }catch(err){
-
-        console.error(err);
-
-        alert("Gagal menyimpan invoice");
-    }
-}
-
-window.saveInvoice = saveInvoice;
-
-/* =========================
-   HISTORY
-========================= */
-
-function renderHistory(filter = "all"){
-
-    onSnapshot(
-        collection(db,"invoices"),
-
-        (snapshot)=>{
-
-            let html = '';
+        function realtimeClock() {
 
             const now = new Date();
 
-            snapshot.forEach((docSnap)=>{
+            const dd =
+                String(now.getDate()).padStart(2, '0');
 
-                const item = docSnap.data();
+            const mm =
+                String(now.getMonth() + 1).padStart(2, '0');
 
-                if(!item.createdAt) return;
+            const yyyy =
+                now.getFullYear();
 
-                let invoiceDate;
+            const hh =
+                String(now.getHours()).padStart(2, '0');
 
-                if(item.createdAt.toDate){
+            const min =
+                String(now.getMinutes()).padStart(2, '0');
 
-                    invoiceDate =
-                        item.createdAt.toDate();
+            const ss =
+                String(now.getSeconds()).padStart(2, '0');
 
-                }else{
+            el('topDate').innerText =
+                `${dd}/${mm}/${yyyy}, ${hh}.${min}.${ss}`;
 
-                    invoiceDate =
-                        new Date(item.createdAt);
-                }
+            el('showDate').innerText =
+                `${dd}-${mm}-${yyyy} ${hh}:${min}`;
 
-                let show = true;
+            el('bottomDate').innerText =
+                `${dd}-${mm}-${yyyy}`;
+        }
 
-                if(filter === "today"){
+        /* =========================
+           GENERATE INVOICE
+        ========================= */
 
-                    show =
-                        invoiceDate.toDateString()
-                        === now.toDateString();
-                }
+        function generateInvoice() {
 
-                if(filter === "yesterday"){
+            const random4Digit =
+                Math.floor(
+                    1000 + Math.random() * 9000
+                );
 
-                    const yesterday =
-                        new Date();
+            const code =
+                'TSC' + random4Digit;
 
-                    yesterday.setDate(
-                        yesterday.getDate() - 1
+            el('invoice_no').value = code;
+        }
+
+        /* =========================
+           UPDATE INVOICE
+        ========================= */
+
+        function updateInvoice() {
+
+            const invoice = el('invoice_no').value || '';
+
+            const customer = el('customer').value || '';
+            const mobile = el('mobile').value || '-';
+            let type = (el('type').value || '').trim().toUpperCase();
+
+            const brandMap = {
+                "OP": "OPPO",
+                "OPP": "OPPO",
+                "OPPO": "OPPO",
+
+                "SA": "SAMSUNG",
+                "SAM": "SAMSUNG",
+                "SAMSUNG": "SAMSUNG",
+
+                "XI": "XIAOMI",
+                "XIA": "XIAOMI",
+                "XIAOMI": "XIAOMI",
+
+                "VI": "VIVO",
+                "VIV": "VIVO",
+                "VIVO": "VIVO",
+
+                "RE": "REALME",
+                "REAL": "REALME",
+                "REALME": "REALME",
+
+                "IP": "IPHONE",
+                "IPH": "IPHONE",
+                "IPHONE": "IPHONE",
+
+                "PO": "POCO",
+                "POC": "POCO",
+                "POCO": "POCO",
+
+                "IN": "INFINIX",
+                "INF": "INFINIX",
+                "INFINIX": "INFINIX",
+
+                "TE": "TECNO",
+                "TEC": "TECNO",
+                "TECNO": "TECNO",
+
+                "IT": "ITEL",
+                "ITE": "ITEL",
+                "ITEL": "ITEL"
+            };
+
+            if (brandMap[type]) {
+                type = brandMap[type];
+
+                el('type').value = type;
+            }
+            const technician = el('technician').value || '';
+            const faulty = el('faulty').value || '';
+            const product = el('product').value || '';
+            const qty = el('qty').value || '1 PCS';
+
+            const qtyNum =
+                parseInt(
+                    qty.replace(/\D/g, '')
+                ) || 1;
+
+            const price =
+                Number(el('price').value || 0);
+
+            const subtotal =
+                qtyNum * price;
+
+            const discountPercent =
+                Number(el('discount').value || 0);
+
+            const discountAmount =
+                subtotal * discountPercent / 100;
+
+            const total =
+                subtotal - discountAmount;
+
+            const payment =
+                el('payment').value;
+
+            /* SHOW */
+
+            el('topInvoice').innerText =
+                invoice;
+
+            el('showInvoiceNo').innerText =
+                invoice;
+
+            el('showCustomer').innerText =
+                customer;
+
+            el('showMobile').innerText =
+                mobile;
+
+            el('showType').innerText =
+                type;
+
+            el('showTechnician').innerText =
+                technician;
+
+            el('showFaulty').innerText =
+                faulty;
+
+            el('showProduct').innerText =
+                product;
+
+            el('showQty').innerText =
+                qty;
+
+            el('showPrice').innerText =
+                rupiah(price);
+
+            el('showSubtotal').innerText =
+                rupiah(subtotal);
+
+            el('showSubtotalBottom').innerText =
+                'Rp ' + rupiah(subtotal);
+
+            el('showTotal').innerText =
+                'Rp ' + rupiah(total);
+
+            el('showTotalPaid').innerText =
+                'Rp ' + rupiah(total);
+
+            el('showPaidLeft').innerText =
+                'Rp ' + rupiah(total);
+
+            el('showPaymentMethod').innerText =
+                payment;
+
+            /* DISCOUNT */
+
+            if (discountPercent > 0) {
+
+                el('discountRow').style.display = '';
+
+                el('showDiscount').innerText =
+                    `(-) Rp ${rupiah(discountAmount)} (${discountPercent}%)`;
+
+            } else {
+
+                el('discountRow').style.display =
+                    'none';
+            }
+
+            /* TERBILANG */
+
+            el('terbilangText').innerText =
+                '(' + numberToWords(total) + ')';
+        }
+
+        window.updateInvoice = updateInvoice;
+
+        /* =========================
+           SAVE
+        ========================= */
+
+        async function saveInvoice() {
+
+            const customer =
+                el('customer').value.trim();
+
+            if (customer === '') {
+
+                alert('Customer wajib diisi');
+
+                return;
+            }
+
+            const data = {
+
+                invoice: el('invoice_no').value,
+
+                customer: el('customer').value,
+
+                mobile: el('mobile').value,
+
+                type: el('type').value,
+
+                technician: el('technician').value,
+
+                faulty: el('faulty').value,
+
+                product: el('product').value,
+
+                qty: el('qty').value,
+
+                price: Number(el('price').value || 0),
+
+                discount: Number(el('discount').value || 0),
+
+                payment: el('payment').value,
+
+                printed: false,
+
+                createdAt: new Date()
+            };
+
+            try {
+
+                if (window.editId) {
+
+                    await updateDoc(
+                        doc(db, "invoices", window.editId),
+                        data
                     );
 
-                    show =
-                        invoiceDate.toDateString()
-                        === yesterday.toDateString();
-                }
+                    alert("Invoice berhasil diupdate");
 
-                if(filter === "week"){
+                    window.editId = null;
 
-                    const weekAgo =
-                        new Date();
-
-                    weekAgo.setDate(
-                        weekAgo.getDate() - 7
+                } else {
+                    await addDoc(
+                        collection(db, "invoices"),
+                        data
                     );
 
-                    show =
-                        invoiceDate >= weekAgo;
+                    alert("Invoice berhasil disimpan");
                 }
 
-                if(filter === "month"){
+                generateInvoice();
 
-                    show =
-                        invoiceDate.getMonth()
-                        === now.getMonth()
-                        &&
-                        invoiceDate.getFullYear()
-                        === now.getFullYear();
-                }
+            } catch (err) {
 
-                if(!show) return;
+                console.error(err);
 
-                const tanggal =
-                    invoiceDate.toLocaleDateString(
-                        'id-ID'
-                    );
+                alert("Gagal menyimpan invoice");
+            }
+        }
 
-                html += `
+        window.saveInvoice = saveInvoice;
+
+        /* =========================
+           HISTORY
+        ========================= */
+
+        function renderHistory(filter = "all") {
+
+            onSnapshot(
+                collection(db, "invoices"),
+
+                (snapshot) => {
+
+                    let html = '';
+
+                    const now = new Date();
+
+                    snapshot.forEach((docSnap) => {
+
+                        const item = docSnap.data();
+
+                        if (!item.createdAt) return;
+
+                        let invoiceDate;
+
+                        if (item.createdAt.toDate) {
+
+                            invoiceDate =
+                                item.createdAt.toDate();
+
+                        } else {
+
+                            invoiceDate =
+                                new Date(item.createdAt);
+                        }
+
+                        let show = true;
+
+                        if (filter === "today") {
+
+                            show =
+                                invoiceDate.toDateString()
+                                === now.toDateString();
+                        }
+
+                        if (filter === "yesterday") {
+
+                            const yesterday =
+                                new Date();
+
+                            yesterday.setDate(
+                                yesterday.getDate() - 1
+                            );
+
+                            show =
+                                invoiceDate.toDateString()
+                                === yesterday.toDateString();
+                        }
+
+                        if (filter === "week") {
+
+                            const weekAgo =
+                                new Date();
+
+                            weekAgo.setDate(
+                                weekAgo.getDate() - 7
+                            );
+
+                            show =
+                                invoiceDate >= weekAgo;
+                        }
+
+                        if (filter === "month") {
+
+                            show =
+                                invoiceDate.getMonth()
+                                === now.getMonth()
+                                &&
+                                invoiceDate.getFullYear()
+                                === now.getFullYear();
+                        }
+
+                        if (!show) return;
+
+                        const tanggal =
+                            invoiceDate.toLocaleDateString(
+                                'id-ID'
+                            );
+
+                        html += `
 
                 <div class="history-box">
 
@@ -994,289 +1204,371 @@ function renderHistory(filter = "all"){
 
                 </div>
                 `;
-            });
+                    });
 
-            if(html === ''){
+                    if (html === '') {
 
-                html = `
+                        html = `
                     <div class="history-box">
                         Tidak ada invoice ditemukan
                     </div>
                 `;
+                    }
+
+                    el('history').innerHTML =
+                        html;
+                }
+            );
+        }
+
+        /* =========================
+           EDIT
+        ========================= */
+
+        window.editInvoice = async function (id) {
+
+            onSnapshot(
+                doc(db, "invoices", id),
+
+                (docSnap) => {
+
+                    if (!docSnap.exists())
+                        return;
+
+                    const data =
+                        docSnap.data();
+
+                    window.editId = id;
+
+                    el('invoice_no').value =
+                        data.invoice;
+
+                    el('customer').value =
+                        data.customer;
+
+                    el('mobile').value =
+                        data.mobile;
+
+                    el('type').value =
+                        data.type;
+
+                    el('technician').value =
+                        data.technician;
+
+                    el('faulty').value =
+                        data.faulty;
+
+                    el('product').value =
+                        data.product;
+
+                    el('qty').value =
+                        data.qty;
+
+                    el('price').value =
+                        data.price;
+
+                    el('discount').value =
+                        data.discount || 0;
+
+                    el('payment').value =
+                        data.payment;
+
+                    updateInvoice();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            );
+        };
+
+        /* =========================
+           DELETE
+        ========================= */
+
+        window.deleteInvoice =
+            async function (id) {
+
+                if (!confirm(
+                    'Hapus invoice ini?'
+                )) return;
+
+                await deleteDoc(
+                    doc(db, "invoices", id)
+                );
+            };
+
+        /* =========================
+           PRINT
+        ========================= */
+
+        window.printInvoice = async function () {
+
+            try {
+
+                const invoiceNo =
+                    el('invoice_no').value;
+
+                const qtyNum =
+                    parseInt(
+                        el('qty').value.replace(/\D/g, '')
+                    ) || 1;
+
+                const price =
+                    Number(el('price').value || 0);
+
+                const subtotal =
+                    qtyNum * price;
+
+                const discount =
+                    Number(el('discount').value || 0);
+
+                const total =
+                    subtotal -
+                    (subtotal * discount / 100);
+
+                const printedInvoices =
+                    JSON.parse(
+                        localStorage.getItem(
+                            'printedInvoices'
+                        ) || '[]'
+                    );
+
+                if (
+                    !printedInvoices.includes(
+                        invoiceNo
+                    )
+                ) {
+
+                    await addDoc(
+                        collection(
+                            db,
+                            "successful_transactions"
+                        ),
+                        {
+                            invoice: invoiceNo,
+                            customer:
+                                el('customer').value,
+                            total: total,
+                            printedAt:
+                                new Date()
+                        }
+                    );
+
+                    printedInvoices.push(
+                        invoiceNo
+                    );
+
+                    localStorage.setItem(
+                        'printedInvoices',
+                        JSON.stringify(
+                            printedInvoices
+                        )
+                    );
+                }
+
+            } catch (err) {
+
+                console.error(err);
             }
 
-            el('history').innerHTML =
-                html;
-        }
-    );
-}
+            window.print();
+        };
 
-/* =========================
-   EDIT
-========================= */
+        /* =========================
+           TOGGLE INVOICE
+        ========================= */
 
-window.editInvoice = async function(id){
+       const invoiceWrapper = el('invoiceWrapper');
+const toggleInvoiceBtn = el('toggleInvoiceBtn');
 
-    onSnapshot(
-        doc(db,"invoices",id),
+// kondisi awal tombol
+toggleInvoiceBtn.innerText = 'Tampilkan Invoice';
 
-        (docSnap)=>{
+toggleInvoiceBtn.addEventListener('click', () => {
 
-            if(!docSnap.exists())
-                return;
+    if (invoiceWrapper.style.display === 'none') {
 
-            const data =
-                docSnap.data();
+        invoiceWrapper.style.display = 'flex';
+        toggleInvoiceBtn.innerText = 'Sembunyikan Invoice';
 
-            window.editId = id;
+    } else {
 
-            el('invoice_no').value =
-                data.invoice;
+        invoiceWrapper.style.display = 'none';
+        toggleInvoiceBtn.innerText = 'Tampilkan Invoice';
 
-            el('customer').value =
-                data.customer;
+    }
 
-            el('mobile').value =
-                data.mobile;
+});
 
-            el('type').value =
-                data.type;
+        /* =========================
+           TOGGLE HISTORY
+        ========================= */
 
-            el('technician').value =
-                data.technician;
+        const historyContainer =
+            el('historyContainer');
 
-            el('faulty').value =
-                data.faulty;
+        const toggleHistoryBtn =
+            el('toggleHistoryBtn');
 
-            el('product').value =
-                data.product;
+        toggleHistoryBtn
+            .addEventListener('click', () => {
 
-            el('qty').value =
-                data.qty;
+                if (
+                    historyContainer.style.display
+                    === 'none'
+                ) {
 
-            el('price').value =
-                data.price;
+                    historyContainer.style.display =
+                        'block';
 
-            el('discount').value =
-                data.discount || 0;
+                    toggleHistoryBtn.innerText =
+                        'Sembunyikan Riwayat Invoice';
 
-            el('payment').value =
-                data.payment;
+                } else {
 
-            updateInvoice();
+                    historyContainer.style.display =
+                        'none';
 
-            window.scrollTo({
-                top:0,
-                behavior:'smooth'
+                    toggleHistoryBtn.innerText =
+                        'Lihat Riwayat Invoice';
+                }
             });
+
+        /* =========================
+           AUTO UPDATE
+        ========================= */
+
+        document
+            .querySelectorAll(
+                'input, textarea, select'
+            )
+            .forEach(item => {
+
+                item.addEventListener(
+                    'input',
+                    updateInvoice
+                );
+            });
+
+        /* =========================
+           INITIAL
+        ========================= */
+
+        if (!el('invoice_no').value) {
+
+            generateInvoice();
         }
-    );
-};
-
-/* =========================
-   DELETE
-========================= */
-
-window.deleteInvoice =
-async function(id){
-
-    if(!confirm(
-        'Hapus invoice ini?'
-    )) return;
-
-    await deleteDoc(
-        doc(db,"invoices",id)
-    );
-};
-
-/* =========================
-   PRINT
-========================= */
-
-window.printInvoice =
-function(){
-
-    window.print();
-};
-
-/* =========================
-   TOGGLE INVOICE
-========================= */
-
-const invoiceWrapper =
-    el('invoiceWrapper');
-
-const toggleInvoiceBtn =
-    el('toggleInvoiceBtn');
-
-toggleInvoiceBtn
-.addEventListener('click',()=>{
-
-    if(
-        invoiceWrapper.style.display
-        === 'none'
-    ){
-
-        invoiceWrapper.style.display =
-            'flex';
-
-        toggleInvoiceBtn.innerText =
-            'Sembunyikan Invoice';
-
-    }else{
-
-        invoiceWrapper.style.display =
-            'none';
-
-        toggleInvoiceBtn.innerText =
-            'Tampilkan Invoice';
-    }
-});
-
-/* =========================
-   TOGGLE HISTORY
-========================= */
-
-const historyContainer =
-    el('historyContainer');
-
-const toggleHistoryBtn =
-    el('toggleHistoryBtn');
-
-toggleHistoryBtn
-.addEventListener('click',()=>{
-
-    if(
-        historyContainer.style.display
-        === 'none'
-    ){
-
-        historyContainer.style.display =
-            'block';
-
-        toggleHistoryBtn.innerText =
-            'Sembunyikan Riwayat Invoice';
-
-    }else{
-
-        historyContainer.style.display =
-            'none';
-
-        toggleHistoryBtn.innerText =
-            'Lihat Riwayat Invoice';
-    }
-});
-
-/* =========================
-   AUTO UPDATE
-========================= */
-
-document
-.querySelectorAll(
-    'input, textarea, select'
-)
-.forEach(item=>{
-
-    item.addEventListener(
-        'input',
-        updateInvoice
-    );
-});
-
-/* =========================
-   INITIAL
-========================= */
-
-if(!el('invoice_no').value){
-
-    generateInvoice();
-}
-
-updateInvoice();
-
-renderHistory();
-
-const historyDateFilter =
-    el("historyDateFilter");
-
-historyDateFilter.addEventListener(
-    "change",
-    function(){
-
-        renderHistory(this.value);
-    }
-);
-
-/* =========================
-   AUTO LOAD LAST
-========================= */
-
-onSnapshot(
-    collection(db,"invoices"),
-
-    (snapshot)=>{
-
-        if(snapshot.empty)
-            return;
-
-        const docs =
-            snapshot.docs;
-
-        const last =
-            docs[docs.length - 1];
-
-        const data =
-            last.data();
-
-        el('invoice_no').value =
-            data.invoice;
-
-        el('customer').value =
-            data.customer;
-
-        el('mobile').value =
-            data.mobile;
-
-        el('type').value =
-            data.type;
-
-        el('technician').value =
-            data.technician;
-
-        el('faulty').value =
-            data.faulty;
-
-        el('product').value =
-            data.product;
-
-        el('qty').value =
-            data.qty;
-
-        el('price').value =
-            data.price;
-
-        el('discount').value =
-            data.discount || 0;
-
-        el('payment').value =
-            data.payment;
 
         updateInvoice();
-    }
-);
 
-/* =========================
-   CLOCK
-========================= */
+        renderHistory();
 
-realtimeClock();
+        const historyDateFilter =
+            el("historyDateFilter");
 
-setInterval(
-    realtimeClock,
-    1000
-);
+        historyDateFilter.addEventListener(
+            "change",
+            function () {
 
-</script>
+                renderHistory(this.value);
+            }
+        );
+
+        /* =========================
+           AUTO LOAD LAST
+        ========================= */
+
+        onSnapshot(
+            collection(db, "invoices"),
+
+            (snapshot) => {
+
+                if (snapshot.empty)
+                    return;
+
+                const docs =
+                    snapshot.docs;
+
+                const last =
+                    docs[docs.length - 1];
+
+                const data = last.data();
+
+                el('invoice_no').value = data.invoice || '';
+                el('customer').value = data.customer || '';
+                el('mobile').value = data.mobile || '-';
+                el('type').value = data.type || '';
+                el('technician').value = data.technician || '';
+                el('faulty').value = data.faulty || '';
+                el('product').value = data.product || '';
+                el('qty').value = data.qty || '1 PCS';
+                el('price').value = data.price || '';
+                el('discount').value = data.discount || 0;
+                el('payment').value = data.payment || 'Tunai';
+
+                updateInvoice();
+            }
+        );
+
+        /* =========================
+           CLOCK
+        ========================= */
+
+        realtimeClock();
+
+        setInterval(
+            realtimeClock,
+            1000
+        );
+        const transactionFilter =
+            el("transactionFilter");
+
+        transactionFilter.addEventListener(
+            "change",
+            function () {
+
+                updateGrandTotal(
+                    this.value
+                );
+            }
+        );
+        updateGrandTotal();
+
+        const typeInput = document.getElementById("type");
+
+        typeInput.addEventListener("keydown", function (e) {
+
+            if (e.key === "Enter") {
+
+                e.preventDefault();
+
+                const value = this.value.toUpperCase();
+
+                const options =
+                    document.querySelectorAll(
+                        "#brandList option"
+                    );
+
+                for (const option of options) {
+
+                    if (
+                        option.value.startsWith(value)
+                    ) {
+                        this.value = option.value;
+                        break;
+                    }
+                }
+
+                document.getElementById(
+                    "technician"
+                ).focus();
+            }
+
+        });
+    </script>
 
 </body>
+
 </html>
