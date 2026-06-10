@@ -1,210 +1,563 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Login</title>
+    <title>Login - TSM POS</title>
 
-<style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
-}
+        .form-group input {
 
-body{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#f5f5f5;
-}
+            height: 50px;
 
-.login-box{
-  width:400px;
-  background:#ffffff;
-  padding:40px;
-  border-radius:24px;
-  box-shadow:
-  0 10px 30px rgba(0,0,0,0.08),
-  0 2px 10px rgba(0,0,0,0.03);
-  border:1px solid #ececec;
-}
+            border: 1px solid #d1d5db;
 
-.title{
-  text-align:center;
-  font-size:34px;
-  font-weight:700;
-  color:#111;
-  margin-bottom:35px;
-  letter-spacing:1px;
-}
+            border-radius: 10px;
 
-.input-group{
-  margin-bottom:22px;
-}
+            font-size: 15px;
 
-label{
-  display:block;
-  margin-bottom:8px;
-  color:#333;
-  font-size:14px;
-  font-weight:600;
-}
+            font-weight: 500;
+        }
 
-input{
-  width:100%;
-  height:54px;
-  border:1px solid #dcdcdc;
-  border-radius:14px;
-  padding:0 16px;
-  font-size:15px;
-  background:#fafafa;
-  transition:.25s;
-}
+        body {
+            margin: 0;
+            min-height: 100vh;
 
-input:focus{
-  outline:none;
-  border-color:#999;
-  background:#fff;
-  box-shadow:0 0 0 4px rgba(0,0,0,0.05);
-}
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #3b82f6);
 
-button{
-  width:100%;
-  height:54px;
-  border:none;
-  border-radius:14px;
-  background:#111111;
-  color:white;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.25s;
-  margin-top:5px;
-}
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-button:hover{
-  background:#222;
-  transform:translateY(-1px);
-}
+        .logo-area {
+            position: absolute;
+            top: 25px;
+            left: 30px;
+        }
 
-button:active{
-  transform:scale(.99);
-}
+        .logo-area img {
+            width: 180px;
+        }
 
-#message{
-  margin-top:18px;
-  text-align:center;
-  font-size:14px;
-}
+        .login-card {
+            width: 100%;
+            max-width: 540px;
 
-.success{
-  color:#1a7f37;
-  font-weight:600;
-}
+            background: #fff;
 
-.error{
-  color:#d93025;
-  font-weight:600;
-}
+            border-radius: 24px;
 
-::placeholder{
-  color:#999;
-}
+            padding: 40px;
 
-</style>
+            box-shadow:
+                0 1px 3px rgba(0, 0, 0, .05),
+                0 10px 30px rgba(0, 0, 0, .08);
+
+            border: 1px solid #e5e7eb;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e1e1e;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+
+            width: 100%;
+            height: 52px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 12px;
+
+            padding: 0 15px;
+        }
+
+        .form-group input:focus {
+
+            outline: none;
+
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 4px rgba(99, 102, 241, .15);
+        }
+
+        .label-flex {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .label-flex a {
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            background:
+                linear-gradient(to right,
+                    #6366f1,
+                    #3b82f6);
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .eye-btn {
+
+            position: absolute;
+
+            right: 12px;
+
+            top: 14px;
+
+            border: none;
+
+            background: none;
+
+            cursor: pointer;
+
+            width: auto;
+            height: auto;
+        }
+
+        .remember-wrap {
+            margin-bottom: 20px;
+        }
+
+        .login-btn {
+
+            width: 100%;
+            height: 50px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(to right,
+                    #6366f1,
+                    #3b82f6);
+
+            color: white;
+
+            font-weight: 700;
+
+            transition: .25s;
+        }
+
+        .login-btn:hover {
+
+            transform: translateY(-1px);
+
+            opacity: .95;
+        }
+
+        .login-btn:hover {
+            opacity: .95;
+        }
+
+        .language-switcher {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            z-index: 999;
+        }
+
+        .language-switcher summary {
+            list-style: none;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .language-switcher summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .language-switcher ul {
+            margin-top: 10px;
+            background: white;
+            width: 220px;
+            border-radius: 16px;
+            padding: 10px;
+            list-style: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+        }
+
+        .language-switcher li {
+            margin: 3px 0;
+        }
+
+        .language-switcher a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #111827;
+            border-radius: 10px;
+        }
+
+        .language-switcher a:hover {
+            background: #f3f4f6;
+        }
+
+        /* =========================
+   TABLET
+========================= */
+        @media (max-width: 768px) {
+
+            body {
+                padding: 20px;
+            }
+
+            .logo-area {
+                position: fixed;
+                top: 15px;
+                left: 15px;
+                z-index: 1000;
+            }
+
+            .logo-area img {
+                width: 120px;
+            }
+
+            .language-switcher {
+                top: 15px;
+                right: 15px;
+            }
+
+            .language-switcher ul {
+                width: 180px;
+            }
+
+            .login-card {
+                max-width: 100%;
+                padding: 30px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+        }
+
+        /* =========================
+   MOBILE
+========================= */
+        @media (max-width: 480px) {
+
+            body {
+                padding: 15px;
+                align-items: center;
+            }
+
+            .logo-area {
+                top: 10px;
+                left: 10px;
+            }
+
+            .logo-area img {
+                width: 100px;
+            }
+
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .language-switcher summary {
+                font-size: 12px;
+            }
+
+            .language-switcher ul {
+                width: 160px;
+            }
+
+            .login-card {
+                width: 100%;
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+
+            .header {
+                margin-top: 15px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .header p {
+                font-size: 13px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+            }
+
+            .form-group input {
+                height: 48px;
+                font-size: 14px;
+            }
+
+            .login-btn {
+                height: 50px;
+                font-size: 14px;
+            }
+
+            .remember-wrap {
+                font-size: 13px;
+            }
+        }
+
+        /* =========================
+   MOBILE KECIL
+========================= */
+        @media (max-width: 360px) {
+
+            .logo-area img {
+                width: 85px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .header p {
+                font-size: 12px;
+            }
+
+            .login-card {
+                padding: 20px 15px;
+            }
+
+            .form-group input {
+                padding: 0 12px;
+            }
+        }
+    </style>
 
 </head>
+
 <body>
 
-<div class="login-box">
+    <div class="language-switcher">
+        <details>
+            <summary>English ▼</summary>
 
-  <div class="title">
-    LOGIN
-  </div>
+            <ul>
+                <li><a href="#">English</a></li>
+                <li><a href="#">Indonesian</a></li>
+                <li><a href="#">Spanish</a></li>
+                <li><a href="#">French</a></li>
+                <li><a href="#">German</a></li>
+                <li><a href="#">Arabic</a></li>
+                <li><a href="#">Portuguese</a></li>
+                <li><a href="#">Vietnamese</a></li>
+                <li><a href="#">Chinese</a></li>
+            </ul>
+        </details>
+    </div>
 
-  <div class="input-group">
-    <label>Email</label>
-    <input type="email" id="email" placeholder="Masukkan Email">
-  </div>
+    <div class="logo-area">
+        <img src="https://www.tolerant-smartphone.net/img/logo-small.png">
+    </div>
 
-  <div class="input-group">
-    <label>Password</label>
-    <input type="password" id="password" placeholder="Masukkan Password">
-  </div>
+    <div class="login-card">
 
-  <button onclick="login()">
-    Masuk
-  </button>
+        <div class="header">
+            <h1>Welcome Back</h1>
+            <p>Login to your TSM POS</p>
+        </div>
 
-  <div id="message"></div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Email">
+        </div>
+
+        <div class="form-group">
+
+            <div class="label-flex">
+                <label>Password</label>
+
+                <a href="#">
+                    Forgot Password?
+                </a>
+
+            </div>
+
+            <div class="password-box">
+
+                <input type="password" id="password" placeholder="Password">
+
+                <button type="button" class="eye-btn" onclick="togglePassword()">
+
+                    <i class="fa fa-eye"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="remember-wrap">
+
+            <label>
+
+                <input type="checkbox">
+
+                Remember Me
+
+            </label>
+
+        </div>
+
+        <button class="login-btn" onclick="login()">
+
+            Login
+
+        </button>
+
+        <div id="message"></div>
+
+    </div>
+
+</body>
+
+<div id="message"></div>
 
 </div>
 
 <script type="module">
+    window.togglePassword = function () {
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        const pass =
+            document.getElementById("password");
 
-import {
-  getAuth,
-  signInWithEmailAndPassword
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        pass.type =
+            pass.type === "password"
+                ? "text"
+                : "password";
+    }
+    import { initializeApp }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyB3mxe87NySKiK3DHy1Xgz9I-pfFmZQNOk",
-  authDomain: "login-d5403.firebaseapp.com",
-  projectId: "login-d5403",
-  storageBucket: "login-d5403.firebasestorage.app",
-  messagingSenderId: "1019154611121",
-  appId: "1:1019154611121:web:4dca630e51d15ebc991b90",
-  measurementId: "G-D9CNBW19L4"
-};
+    import {
+        getAuth,
+        signInWithEmailAndPassword
+    }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+    const firebaseConfig = {
+        apiKey: "AIzaSyB3mxe87NySKiK3DHy1Xgz9I-pfFmZQNOk",
+        authDomain: "login-d5403.firebaseapp.com",
+        projectId: "login-d5403",
+        storageBucket: "login-d5403.firebasestorage.app",
+        messagingSenderId: "1019154611121",
+        appId: "1:1019154611121:web:4dca630e51d15ebc991b90",
+        measurementId: "G-D9CNBW19L4"
+    };
 
-window.login = function(){
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-  const email =
-  document.getElementById("email").value;
+    window.login = function () {
 
-  const password =
-  document.getElementById("password").value;
+        const email =
+            document.getElementById("email").value;
 
-  const message =
-  document.getElementById("message");
+        const password =
+            document.getElementById("password").value;
 
-  signInWithEmailAndPassword(auth, email, password)
+        const message =
+            document.getElementById("message");
+        if (!email || !password) {
 
-  .then((userCredential) => {
+            message.innerHTML =
+                "<div class='error'>Email dan Password wajib diisi</div>";
 
-    message.innerHTML =
-    "<div class='success'>Login Berhasil</div>";
+            return;
+        }
 
-    setTimeout(()=>{
+        signInWithEmailAndPassword(auth, email, password)
 
-      window.location.href = "login.html";
+            .then((userCredential) => {
 
-    },1000);
+                message.innerHTML =
+                    "<div class='success'>Login Berhasil</div>";
 
-  })
+                setTimeout(() => {
 
-  .catch((error) => {
+                    window.location.href = "login.html";
 
-    message.innerHTML =
-    "<div class='error'>Email atau password salah</div>";
+                }, 1000);
 
-  });
+            })
 
-}
+            .catch((error) => {
 
+                message.innerHTML =
+                    "<div class='error'>Email atau password salah</div>";
+
+            });
+
+    }
+
+    document.addEventListener("keydown", function (e) {
+
+        if (e.key === "Enter") {
+
+            login();
+        }
+
+    });
 </script>
-
 </body>
+
 </html>
